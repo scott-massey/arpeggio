@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Combine
+import KeychainAccess
+import SpotifyWebAPI
 
 class ViewController: UIViewController {
 
@@ -13,7 +16,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    
+    let spotify = Spotify()
 
-
+    @IBAction func initiateSignIn(_ sender: Any) {
+        spotify.authorize()
+    }
+    
 }
-

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,9 @@
 		A82DB14827388FF40032FF21 /* arpeggio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A82DB14627388FF40032FF21 /* arpeggio.xcdatamodeld */; };
 		A82DB14A27388FF70032FF21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A82DB14927388FF70032FF21 /* Assets.xcassets */; };
 		A82DB14D27388FF70032FF21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A82DB14B27388FF70032FF21 /* LaunchScreen.storyboard */; };
+		A8DF4A95273CC3EA004C730B /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = A8DF4A94273CC3EA004C730B /* SpotifyAPI */; };
+		A8DF4A9A273CDB3E004C730B /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A8DF4A99273CDB3E004C730B /* KeychainAccess */; };
+		A8DF4A9C273CDD6C004C730B /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DF4A9B273CDD6C004C730B /* Spotify.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,7 @@
 		A82DB14927388FF70032FF21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A82DB14C27388FF70032FF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A82DB14E27388FF70032FF21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8DF4A9B273CDD6C004C730B /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8DF4A95273CC3EA004C730B /* SpotifyAPI in Frameworks */,
+				A8DF4A9A273CDB3E004C730B /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +72,7 @@
 				A82DB14B27388FF70032FF21 /* LaunchScreen.storyboard */,
 				A82DB14E27388FF70032FF21 /* Info.plist */,
 				A82DB14627388FF40032FF21 /* arpeggio.xcdatamodeld */,
+				A8DF4A9B273CDD6C004C730B /* Spotify.swift */,
 			);
 			path = arpeggio;
 			sourceTree = "<group>";
@@ -86,6 +93,10 @@
 			dependencies = (
 			);
 			name = arpeggio;
+			packageProductDependencies = (
+				A8DF4A94273CC3EA004C730B /* SpotifyAPI */,
+				A8DF4A99273CDB3E004C730B /* KeychainAccess */,
+			);
 			productName = arpeggio;
 			productReference = A82DB13A27388FF40032FF21 /* arpeggio.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +124,10 @@
 				Base,
 			);
 			mainGroup = A82DB13127388FF40032FF21;
+			packageReferences = (
+				A8DF4A93273CC3EA004C730B /* XCRemoteSwiftPackageReference "SpotifyAPI" */,
+				A8DF4A98273CDB3E004C730B /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+			);
 			productRefGroup = A82DB13B27388FF40032FF21 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A82DB14227388FF40032FF21 /* ViewController.swift in Sources */,
+				A8DF4A9C273CDD6C004C730B /* Spotify.swift in Sources */,
 				A82DB13E27388FF40032FF21 /* AppDelegate.swift in Sources */,
 				A82DB14027388FF40032FF21 /* SceneDelegate.swift in Sources */,
 				A82DB14827388FF40032FF21 /* arpeggio.xcdatamodeld in Sources */,
@@ -205,7 +221,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -292,6 +308,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H44LMG4635;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				INFOPLIST_FILE = arpeggio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -311,6 +329,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H44LMG4635;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				INFOPLIST_FILE = arpeggio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -345,6 +364,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A8DF4A93273CC3EA004C730B /* XCRemoteSwiftPackageReference "SpotifyAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Peter-Schorn/SpotifyAPI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		A8DF4A98273CDB3E004C730B /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A8DF4A94273CC3EA004C730B /* SpotifyAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A8DF4A93273CC3EA004C730B /* XCRemoteSwiftPackageReference "SpotifyAPI" */;
+			productName = SpotifyAPI;
+		};
+		A8DF4A99273CDB3E004C730B /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A8DF4A98273CDB3E004C730B /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		A82DB14627388FF40032FF21 /* arpeggio.xcdatamodeld */ = {
