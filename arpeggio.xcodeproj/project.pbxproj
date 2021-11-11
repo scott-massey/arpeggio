@@ -14,6 +14,7 @@
 		A82DB14827388FF40032FF21 /* arpeggio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A82DB14627388FF40032FF21 /* arpeggio.xcdatamodeld */; };
 		A82DB14A27388FF70032FF21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A82DB14927388FF70032FF21 /* Assets.xcassets */; };
 		A82DB14D27388FF70032FF21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A82DB14B27388FF70032FF21 /* LaunchScreen.storyboard */; };
+		A8DF4A9127389680004C730B /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8DF4A9027389680004C730B /* SpotifyiOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		A82DB14927388FF70032FF21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A82DB14C27388FF70032FF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A82DB14E27388FF70032FF21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8DF4A9027389680004C730B /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
+		A8DF4A9227389806004C730B /* Arpeggio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Arpeggio-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8DF4A9127389680004C730B /* SpotifyiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				A82DB13C27388FF40032FF21 /* arpeggio */,
+				A8DF4A9027389680004C730B /* SpotifyiOS.framework */,
 				A82DB13B27388FF40032FF21 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,6 +63,7 @@
 		A82DB13C27388FF40032FF21 /* arpeggio */ = {
 			isa = PBXGroup;
 			children = (
+				A8DF4A9227389806004C730B /* Arpeggio-Bridging-Header.h */,
 				A82DB13D27388FF40032FF21 /* AppDelegate.swift */,
 				A82DB13F27388FF40032FF21 /* SceneDelegate.swift */,
 				A82DB14127388FF40032FF21 /* ViewController.swift */,
@@ -292,13 +298,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H44LMG4635;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = arpeggio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.washu.arpeggio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Arpeggio-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -311,13 +323,19 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = H44LMG4635;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = arpeggio/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.washu.arpeggio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Arpeggio-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
