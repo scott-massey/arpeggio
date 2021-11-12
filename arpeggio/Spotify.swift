@@ -162,6 +162,7 @@ final class Spotify {
                 },
                 receiveValue: { user in
                     self.currentUser = user
+                    print(user)
                 }
             )
             .store(in: &cancellables)
