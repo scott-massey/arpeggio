@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		A82DB13E27388FF40032FF21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82DB13D27388FF40032FF21 /* AppDelegate.swift */; };
 		A82DB14027388FF40032FF21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82DB13F27388FF40032FF21 /* SceneDelegate.swift */; };
-		A82DB14227388FF40032FF21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82DB14127388FF40032FF21 /* ViewController.swift */; };
+		A82DB14227388FF40032FF21 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82DB14127388FF40032FF21 /* LoginController.swift */; };
 		A82DB14527388FF40032FF21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A82DB14327388FF40032FF21 /* Main.storyboard */; };
 		A82DB14827388FF40032FF21 /* arpeggio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A82DB14627388FF40032FF21 /* arpeggio.xcdatamodeld */; };
 		A82DB14A27388FF70032FF21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A82DB14927388FF70032FF21 /* Assets.xcassets */; };
@@ -17,19 +17,29 @@
 		A8DF4A95273CC3EA004C730B /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = A8DF4A94273CC3EA004C730B /* SpotifyAPI */; };
 		A8DF4A9A273CDB3E004C730B /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A8DF4A99273CDB3E004C730B /* KeychainAccess */; };
 		A8DF4A9C273CDD6C004C730B /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DF4A9B273CDD6C004C730B /* Spotify.swift */; };
+		A8DF4A9F273EFFC1004C730B /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8DF4A9E273EFFC1004C730B /* Feed.storyboard */; };
+		A8DF4AA1273F01BA004C730B /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8DF4AA0273F01BA004C730B /* Discover.storyboard */; };
+		A8DF4AA3273F0201004C730B /* People.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8DF4AA2273F0201004C730B /* People.storyboard */; };
+		A8DF4AA5273F025E004C730B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8DF4AA4273F025E004C730B /* Profile.storyboard */; };
+		A8DF4AAA273F0C9B004C730B /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DF4AA9273F0C9B004C730B /* ProfileController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A82DB13A27388FF40032FF21 /* arpeggio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = arpeggio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82DB13D27388FF40032FF21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A82DB13F27388FF40032FF21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A82DB14127388FF40032FF21 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A82DB14127388FF40032FF21 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		A82DB14427388FF40032FF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A82DB14727388FF40032FF21 /* arpeggio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = arpeggio.xcdatamodel; sourceTree = "<group>"; };
 		A82DB14927388FF70032FF21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A82DB14C27388FF70032FF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A82DB14E27388FF70032FF21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8DF4A9B273CDD6C004C730B /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
+		A8DF4A9E273EFFC1004C730B /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
+		A8DF4AA0273F01BA004C730B /* Discover.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
+		A8DF4AA2273F0201004C730B /* People.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = People.storyboard; sourceTree = "<group>"; };
+		A8DF4AA4273F025E004C730B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		A8DF4AA9273F0C9B004C730B /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,17 +74,38 @@
 		A82DB13C27388FF40032FF21 /* arpeggio */ = {
 			isa = PBXGroup;
 			children = (
+				A8DF4AA6273F06DB004C730B /* Controllers */,
+				A8DF4A9D273EFFAD004C730B /* Views */,
 				A82DB13D27388FF40032FF21 /* AppDelegate.swift */,
 				A82DB13F27388FF40032FF21 /* SceneDelegate.swift */,
-				A82DB14127388FF40032FF21 /* ViewController.swift */,
-				A82DB14327388FF40032FF21 /* Main.storyboard */,
 				A82DB14927388FF70032FF21 /* Assets.xcassets */,
-				A82DB14B27388FF70032FF21 /* LaunchScreen.storyboard */,
 				A82DB14E27388FF70032FF21 /* Info.plist */,
 				A82DB14627388FF40032FF21 /* arpeggio.xcdatamodeld */,
 				A8DF4A9B273CDD6C004C730B /* Spotify.swift */,
 			);
 			path = arpeggio;
+			sourceTree = "<group>";
+		};
+		A8DF4A9D273EFFAD004C730B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A82DB14327388FF40032FF21 /* Main.storyboard */,
+				A82DB14B27388FF70032FF21 /* LaunchScreen.storyboard */,
+				A8DF4A9E273EFFC1004C730B /* Feed.storyboard */,
+				A8DF4AA0273F01BA004C730B /* Discover.storyboard */,
+				A8DF4AA2273F0201004C730B /* People.storyboard */,
+				A8DF4AA4273F025E004C730B /* Profile.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A8DF4AA6273F06DB004C730B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A82DB14127388FF40032FF21 /* LoginController.swift */,
+				A8DF4AA9273F0C9B004C730B /* ProfileController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +175,10 @@
 			files = (
 				A82DB14D27388FF70032FF21 /* LaunchScreen.storyboard in Resources */,
 				A82DB14A27388FF70032FF21 /* Assets.xcassets in Resources */,
+				A8DF4AA1273F01BA004C730B /* Discover.storyboard in Resources */,
+				A8DF4AA3273F0201004C730B /* People.storyboard in Resources */,
+				A8DF4A9F273EFFC1004C730B /* Feed.storyboard in Resources */,
+				A8DF4AA5273F025E004C730B /* Profile.storyboard in Resources */,
 				A82DB14527388FF40032FF21 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,11 +190,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A82DB14227388FF40032FF21 /* ViewController.swift in Sources */,
+				A82DB14227388FF40032FF21 /* LoginController.swift in Sources */,
 				A8DF4A9C273CDD6C004C730B /* Spotify.swift in Sources */,
 				A82DB13E27388FF40032FF21 /* AppDelegate.swift in Sources */,
 				A82DB14027388FF40032FF21 /* SceneDelegate.swift in Sources */,
 				A82DB14827388FF40032FF21 /* arpeggio.xcdatamodeld in Sources */,
+				A8DF4AAA273F0C9B004C730B /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

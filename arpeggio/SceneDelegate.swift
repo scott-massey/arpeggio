@@ -7,6 +7,7 @@
 
 import UIKit
 import SpotifyWebAPI
+import KeychainAccess
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,82 +19,75 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        if (Spotify.shared.keychain[data: Spotify.shared.authorizationManagerKey] != nil)  {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let home = storyboard.instantiateViewController(identifier: "Home")
+            window?.rootViewController = home
+        }
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        print("openURLContexts")
         if let url = URLContexts.first?.url {
-            // Handle URL
-            print(url)
-            
-            if let view = self.window {
-                if let vc = view.rootViewController as? ViewController {
-                    // **Always** validate URLs; they offer a potential attack vector into
-                    // your app.
-                    guard url.scheme == vc.spotify.loginCallbackURL.scheme else {
-                        print("not handling URL: unexpected scheme: '\(url)'")
-                        return
-                    }
-                    
-                    print("received redirect from Spotify: '\(url)'")
-                    
-                    // This property is used to display an activity indicator in `LoginView`
-                    // indicating that the access and refresh tokens are being retrieved.
-                    vc.spotify.isRetrievingTokens = true
-                    
-                    // Complete the authorization process by requesting the access and
-                    // refresh tokens.
-                    vc.spotify.api.authorizationManager.requestAccessAndRefreshTokens(
-                        redirectURIWithQuery: url,
-                        codeVerifier: vc.spotify.codeVerifier,
-                        // This value must be the same as the one used to create the
-                        // authorization URL. Otherwise, an error will be thrown.
-                        state: vc.spotify.authorizationState
-                    )
-                    .receive(on: RunLoop.main)
-                    .sink(receiveCompletion: { completion in
-                        // Whether the request succeeded or not, we need to remove the
-                        // activity indicator.
-                        vc.spotify.isRetrievingTokens = false
-                        
-                        /*
-                         After the access and refresh tokens are retrieved,
-                         `SpotifyAPI.authorizationManagerDidChange` will emit a signal,
-                         causing `Spotify.authorizationManagerDidChange()` to be called,
-                         which will dismiss the loginView if the app was successfully
-                         authorized by setting the @Published `Spotify.isAuthorized`
-                         property to `true`.
-
-                         The only thing we need to do here is handle the error and show it
-                         to the user if one was received.
-                         */
-                        if case .failure(let error) = completion {
-                            print("couldn't retrieve access and refresh tokens:\n\(error)")
-                            let alertTitle: String
-                            let alertMessage: String
-                            if let authError = error as? SpotifyAuthorizationError,
-                               authError.accessWasDenied {
-                                alertTitle = "You Denied The Authorization Request :("
-                                alertMessage = ""
-                            }
-                            else {
-                                alertTitle =
-                                    "Couldn't Authorization With Your Account"
-                                alertMessage = error.localizedDescription
-                            }
-                            print("Error \(alertTitle): \(alertMessage)")
-                        }
-                    })
-                    .store(in: &vc.spotify.cancellables)
-                    
-                    // MARK: IMPORTANT: generate a new value for the state parameter after
-                    // MARK: each authorization request. This ensures an incoming redirect
-                    // MARK: from Spotify was the result of a request made by this app, and
-                    // MARK: and not an attacker.
-                    vc.spotify.authorizationState = String.randomURLSafe(length: 128)
-                }
+            // **Always** validate URLs; they offer a potential attack vector into
+            // your app.
+            guard url.scheme == Spotify.shared.loginCallbackURL.scheme else {
+                print("not handling URL: unexpected scheme: '\(url)'")
+                return
             }
+            
+            print("received redirect from Spotify: '\(url)'")
+            
+            Spotify.shared.isRetrievingTokens = true
+            Spotify.shared.api.authorizationManager.requestAccessAndRefreshTokens(
+                redirectURIWithQuery: url,
+                codeVerifier: Spotify.shared.codeVerifier,
+                state: Spotify.shared.authorizationState
+            )
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { completion in
+                Spotify.shared.isRetrievingTokens = false
+                if case .failure(let error) = completion {
+                    print("couldn't retrieve access and refresh tokens:\n\(error)")
+                    let alertTitle: String
+                    let alertMessage: String
+                    if let authError = error as? SpotifyAuthorizationError,
+                       authError.accessWasDenied {
+                        alertTitle = "You Denied The Authorization Request :("
+                        alertMessage = ""
+                    }
+                    else {
+                        alertTitle =
+                            "Couldn't Authorization With Your Account"
+                        alertMessage = error.localizedDescription
+                    }
+                    print("Error \(alertTitle): \(alertMessage)")
+                }
+                Spotify.shared.authorizationState = String.randomURLSafe(length: 128)
+                Spotify.shared.codeVerifier = String.randomURLSafe(length: 128)
+                Spotify.shared.codeChallenge = String.makeCodeChallenge(codeVerifier: Spotify.shared.codeVerifier)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let home = storyboard.instantiateViewController(identifier: "Home")
+                self.window?.rootViewController = home
+            })
+            .store(in: &Spotify.shared.cancellables)
         }
+    }
+    
+    func changeRootViewController(_ vc: UIViewController, animated: Bool = true) {
+        guard let window = self.window else {
+            return
+        }
+        
+        // change the root view controller to your specific view controller
+        window.rootViewController = vc
+        
+        // add animation
+        UIView.transition(with: window,
+                          duration: 0.5,
+                          options: [.transitionFlipFromLeft],
+                          animations: nil,
+                          completion: nil)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

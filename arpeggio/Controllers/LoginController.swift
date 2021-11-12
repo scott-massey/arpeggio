@@ -10,17 +10,15 @@ import Combine
 import KeychainAccess
 import SpotifyWebAPI
 
-class ViewController: UIViewController {
+class LoginController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
-    let spotify = Spotify()
 
     @IBAction func initiateSignIn(_ sender: Any) {
-        spotify.authorize()
+        Spotify.shared.authorize()
     }
     
 }

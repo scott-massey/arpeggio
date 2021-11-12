@@ -11,6 +11,8 @@ import SpotifyWebAPI
 import KeychainAccess
 
 final class Spotify {
+    static let shared = Spotify()
+    
     private static let clientId: String = {
         if let clientId = ProcessInfo.processInfo
                 .environment["CLIENT_ID"] {
@@ -79,7 +81,6 @@ final class Spotify {
     }
     
     func authorize() {
-        
         let url = api.authorizationManager.makeAuthorizationURL(
             redirectURI: self.loginCallbackURL,
             codeChallenge: self.codeChallenge,
@@ -94,10 +95,6 @@ final class Spotify {
                 .userReadRecentlyPlayed
             ]
         )!
-        
-        // You can open the URL however you like. For example, you could open
-        // it in a web view instead of the browser.
-        // See https://developer.apple.com/documentation/webkit/wkwebview
         UIApplication.shared.open(url)
         
     }
@@ -168,6 +165,5 @@ final class Spotify {
                 }
             )
             .store(in: &cancellables)
-        
     }
 }
