@@ -24,6 +24,8 @@
 		A8DF4AA5273F025E004C730B /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8DF4AA4273F025E004C730B /* Profile.storyboard */; };
 		A8DF4AAA273F0C9B004C730B /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DF4AA9273F0C9B004C730B /* ProfileController.swift */; };
 		A8DF4AAC273F29DD004C730B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8DF4AAB273F29DD004C730B /* GoogleService-Info.plist */; };
+		A8DF4AAF27404F2D004C730B /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DF4AAE27404F2D004C730B /* Crypto.swift */; };
+		A8DF4AB1274059CB004C730B /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DF4AB0274059CB004C730B /* Firebase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		A8DF4AA4273F025E004C730B /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		A8DF4AA9273F0C9B004C730B /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		A8DF4AAB273F29DD004C730B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A8DF4AAE27404F2D004C730B /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		A8DF4AB0274059CB004C730B /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		BB57A38D2FD4D2BC4998D0D5 /* Pods_arpeggio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_arpeggio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -91,6 +95,7 @@
 		A82DB13C27388FF40032FF21 /* arpeggio */ = {
 			isa = PBXGroup;
 			children = (
+				A8DF4AAD27404F1C004C730B /* utils */,
 				A8DF4AA6273F06DB004C730B /* Controllers */,
 				A8DF4A9D273EFFAD004C730B /* Views */,
 				A82DB13D27388FF40032FF21 /* AppDelegate.swift */,
@@ -98,7 +103,6 @@
 				A82DB14927388FF70032FF21 /* Assets.xcassets */,
 				A82DB14E27388FF70032FF21 /* Info.plist */,
 				A82DB14627388FF40032FF21 /* arpeggio.xcdatamodeld */,
-				A8DF4A9B273CDD6C004C730B /* Spotify.swift */,
 				A8DF4AAB273F29DD004C730B /* GoogleService-Info.plist */,
 			);
 			path = arpeggio;
@@ -124,6 +128,16 @@
 				A8DF4AA9273F0C9B004C730B /* ProfileController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A8DF4AAD27404F1C004C730B /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				A8DF4AAE27404F2D004C730B /* Crypto.swift */,
+				A8DF4A9B273CDD6C004C730B /* Spotify.swift */,
+				A8DF4AB0274059CB004C730B /* Firebase.swift */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 		E91B374433BB81DF41D47C3A /* Pods */ = {
@@ -264,9 +278,11 @@
 			files = (
 				A82DB14227388FF40032FF21 /* LoginController.swift in Sources */,
 				A8DF4A9C273CDD6C004C730B /* Spotify.swift in Sources */,
+				A8DF4AB1274059CB004C730B /* Firebase.swift in Sources */,
 				A82DB13E27388FF40032FF21 /* AppDelegate.swift in Sources */,
 				A82DB14027388FF40032FF21 /* SceneDelegate.swift in Sources */,
 				A82DB14827388FF40032FF21 /* arpeggio.xcdatamodeld in Sources */,
+				A8DF4AAF27404F2D004C730B /* Crypto.swift in Sources */,
 				A8DF4AAA273F0C9B004C730B /* ProfileController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

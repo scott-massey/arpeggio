@@ -8,6 +8,8 @@
 import UIKit
 import SpotifyWebAPI
 import KeychainAccess
+import Firebase
+import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

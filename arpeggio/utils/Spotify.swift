@@ -9,6 +9,8 @@ import UIKit
 import Combine
 import SpotifyWebAPI
 import KeychainAccess
+import Firebase
+import FirebaseDatabase
 
 final class Spotify {
     static let shared = Spotify()
@@ -43,6 +45,10 @@ final class Spotify {
     )
     
     var cancellables: Set<AnyCancellable> = []
+    
+    // MARK: Firebase stuff
+    var currentFBUser: User? = nil
+    var databaseRef = Database.database().reference()
     
     init() {
         // Configure the loggers.
@@ -171,7 +177,11 @@ final class Spotify {
                 },
                 receiveValue: { user in
                     self.currentUser = user
-                    print(user)
+                    if (onlyIfNil) {
+                        let email = user.email!
+                        let password = user.id.hashed(.sha256)!
+                        self.firebaseAuth(email: email, password: password)
+                    }
                 }
             )
             .store(in: &cancellables)
