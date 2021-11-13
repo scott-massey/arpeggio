@@ -86,13 +86,22 @@ final class Spotify {
             codeChallenge: self.codeChallenge,
             state: authorizationState,
             scopes: [
+                .ugcImageUpload,
                 .userReadPlaybackState,
                 .userModifyPlaybackState,
-                .playlistModifyPrivate,
+                .userReadCurrentlyPlaying,
+                .userReadRecentlyPlayed,
+                .streaming,
+                .appRemoteControl,
+                .playlistReadPrivate,
                 .playlistModifyPublic,
+                .playlistModifyPrivate,
+                .playlistReadCollaborative,
                 .userLibraryRead,
                 .userLibraryModify,
-                .userReadRecentlyPlayed
+                .userTopRead,
+                .userReadEmail,
+                .userReadPrivate
             ]
         )!
         UIApplication.shared.open(url)
