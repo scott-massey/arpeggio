@@ -178,9 +178,7 @@ final class Spotify {
                 receiveValue: { user in
                     self.currentUser = user
                     if (onlyIfNil) {
-                        let email = user.email!
-                        let password = user.id.hashed(.sha256)!
-                        self.firebaseAuth(email: email, password: password)
+                        self.firebaseAuth(spotifyUser: user)
                     }
                 }
             )
