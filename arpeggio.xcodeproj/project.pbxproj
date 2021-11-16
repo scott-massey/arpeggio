@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A3760D52743430E00A204AA /* PlaylistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3760D42743430E00A204AA /* PlaylistCollectionViewCell.swift */; };
 		6C8F67D2C6FCD3CF24280511 /* Pods_arpeggio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB57A38D2FD4D2BC4998D0D5 /* Pods_arpeggio.framework */; };
 		A82DB13E27388FF40032FF21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82DB13D27388FF40032FF21 /* AppDelegate.swift */; };
 		A82DB14027388FF40032FF21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82DB13F27388FF40032FF21 /* SceneDelegate.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A3760D42743430E00A204AA /* PlaylistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionViewCell.swift; sourceTree = "<group>"; };
 		45B5F3377F5FFA7A4EDA2CA2 /* Pods-arpeggio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-arpeggio.debug.xcconfig"; path = "Target Support Files/Pods-arpeggio/Pods-arpeggio.debug.xcconfig"; sourceTree = "<group>"; };
 		77AF5FEAC3C9F0E196304F75 /* Pods-arpeggio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-arpeggio.release.xcconfig"; path = "Target Support Files/Pods-arpeggio/Pods-arpeggio.release.xcconfig"; sourceTree = "<group>"; };
 		A82DB13A27388FF40032FF21 /* arpeggio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = arpeggio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,8 +126,9 @@
 		A8DF4AA6273F06DB004C730B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A82DB14127388FF40032FF21 /* LoginController.swift */,
 				A8DF4AA9273F0C9B004C730B /* ProfileController.swift */,
+				A82DB14127388FF40032FF21 /* LoginController.swift */,
+				2A3760D42743430E00A204AA /* PlaylistCollectionViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A82DB14227388FF40032FF21 /* LoginController.swift in Sources */,
+				2A3760D52743430E00A204AA /* PlaylistCollectionViewCell.swift in Sources */,
 				A8DF4A9C273CDD6C004C730B /* Spotify.swift in Sources */,
 				A8DF4AB1274059CB004C730B /* Firebase.swift in Sources */,
 				A82DB13E27388FF40032FF21 /* AppDelegate.swift in Sources */,
@@ -345,7 +349,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
