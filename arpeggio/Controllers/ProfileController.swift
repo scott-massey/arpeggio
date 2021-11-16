@@ -6,12 +6,27 @@
 //
 
 import UIKit
+import Combine
+import SpotifyWebAPI
 
-class ProfileController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate {
+class ProfileController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
+    // Constants
+    let itemsPerRow: CGFloat = 1
+    let sectionInsets = UIEdgeInsets(
+        top: 10.0,
+        left: 10.0,
+        bottom: 10.0,
+        right: 10.0
+    )
+    
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    
+    var cancellables: Set<AnyCancellable> = []
+    var playlists: [Playlist<PlaylistItemsReference>] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +35,8 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
         
         setupCollectionView()
         getProfileImage()
+        getPlaylists()
+        
     }
     
     func setupCollectionView() {
@@ -43,6 +60,34 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
         }
     }
     
+    func getPlaylists() {
+        // change this
+        guard let user = Spotify.shared.currentUser else {
+            return
+        }
+        
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        collectionView.addSubview(activityIndicator)
+        activityIndicator.frame = collectionView.bounds
+        activityIndicator.startAnimating()
+        
+        Spotify.shared.api.userPlaylists(for: user.uri, limit: 3)
+            .receive(on: RunLoop.main)
+            .sink(
+                receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        print("couldn't retrieve current user: \(error)")
+                    }
+                },
+                receiveValue: { result in
+                    self.playlists = result.items
+                    activityIndicator.removeFromSuperview()
+                    self.collectionView?.reloadData()
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
     @IBAction func logOut(_ sender: Any) {
         Spotify.shared.api.authorizationManager.deauthorize()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -54,22 +99,72 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return playlists.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "Cell",
+            for: indexPath
+        ) as? PlaylistCollectionViewCell
+
+        let playlist = playlists[indexPath.row]
+
+        if let unwrappedCell = cell {
+            unwrappedCell.backgroundColor = UIColor.white
+
+            do {
+                if playlist.images.count >= 3 {
+                    let data = try Data(contentsOf: playlist.images[1].url)
+                    let image = UIImage(data: data)
+                    unwrappedCell.imageView.image = image
+                }
+            } catch {
+                print("Error: could not show image")
+            }
+
+            return unwrappedCell
+        }
+        
         return collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
     }
     
-    /*
-    // MARK: - Navigation
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+                
+        return CGSize(width: widthPerItem, height: widthPerItem)
     }
-    */
+      
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+      ) -> UIEdgeInsets {
+        return sectionInsets
+    }
+      
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+      ) -> CGFloat {
+        return sectionInsets.left
+    }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let url = playlists[indexPath.item].externalURLs?["spotify"]
+        
+        if let unwrappedURL = url {
+            if UIApplication.shared.canOpenURL(unwrappedURL) {
+                UIApplication.shared.open(unwrappedURL)
+            }
+        }
+    }
 }
