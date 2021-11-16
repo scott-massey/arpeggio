@@ -37,7 +37,15 @@ extension Spotify {
         guard let fbUser = self.currentFBUser else { return }
         let profileImage = spotifyUser.images?[0]
         let url = profileImage?.url.absoluteString
+        let spotifyUserURI = spotifyUser.uri
         
-        self.databaseRef.child("users").child(fbUser.uid).setValue(["email": spotifyUser.email!, "displayName": spotifyUser.displayName!, "profileURL": url!])
+        self.databaseRef.child("users")
+            .child(fbUser.uid)
+            .setValue([
+                "email": spotifyUser.email!,
+                "displayName": spotifyUser.displayName!,
+                "profileURL": url!,
+                "spotifyUserURI": spotifyUserURI
+            ])
     }
 }
