@@ -37,7 +37,7 @@ extension Spotify {
         guard let fbUser = self.currentFBUser else { return }
         let profileImage = spotifyUser.images?[0]
         let url = profileImage?.url.absoluteString
-        let userURI = spotifyUser.uri
+        let spotifyUserURI = spotifyUser.uri
         
         self.databaseRef.child("users")
             .child(fbUser.uid)
@@ -45,7 +45,7 @@ extension Spotify {
                 "email": spotifyUser.email!,
                 "displayName": spotifyUser.displayName!,
                 "profileURL": url!,
-                "userURI": userURI
+                "spotifyUserURI": spotifyUserURI
             ])
     }
 }
