@@ -39,7 +39,8 @@ extension Spotify {
         let url = profileImage?.url.absoluteString
         let spotifyUserURI = spotifyUser.uri
         
-        self.databaseRef.child("users")
+        self.databaseRef
+            .child("users")
             .child(fbUser.uid)
             .setValue([
                 "email": spotifyUser.email!,

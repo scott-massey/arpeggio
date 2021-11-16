@@ -45,7 +45,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="beu-M8-T3J" secondAttribute="trailing" id="OjJ-He-bVL"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="165" height="173"/>
                                         <connections>
                                             <outlet property="imageView" destination="beu-M8-T3J" id="Re5-Hk-WbD"/>
