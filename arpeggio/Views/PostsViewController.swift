@@ -2,16 +2,23 @@
 //  PostsViewController.swift
 //  arpeggio
 //
-//  Created by Justin Pressman on 11/16/21.
+//  Created by Justin Pressman on 11/11/21.
 //
 
 import UIKit
 import Combine
 import KeychainAccess
 import SpotifyWebAPI
+import Firebase
+import FirebaseDatabase
 
 class PostsViewController: UIViewController {
 
+    @IBOutlet weak var titleOutlet: UITextField!
+    @IBOutlet weak var artistOutlet: UITextField!
+    @IBOutlet weak var urlOutlet: UITextField!
+    @IBOutlet weak var captionOutlet: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -22,7 +29,22 @@ class PostsViewController: UIViewController {
     }
     
     func createFirebasePost() {
+        guard let fbUser = Spotify.shared.currentFBUser else { return }
+        let postTitle = titleOutlet.text
+        let postArtist = artistOutlet.text
+        let postURL = urlOutlet.text
+        let postCaption = captionOutlet.text
         
+        let postDict = ["title": postTitle, "artist": postArtist, "url": postURL, "caption": postCaption]
+        
+        Database.database().reference()
+            .child("users")
+            .child(fbUser.uid)
+            .child("posts")
+            .setValue([
+                "post": postDict
+            ])
+        currentPosts.append(postDict)
     }
 
     /*
