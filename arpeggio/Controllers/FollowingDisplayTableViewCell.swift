@@ -13,6 +13,7 @@ class FollowingDisplayTableViewCell: UITableViewCell {
     @IBOutlet weak var followingName: UILabel!
     
     var spotifyUserURI: String!
+    var FBUID: String!
     
     override func awakeFromNib() {
         super.awakeFromNib()
