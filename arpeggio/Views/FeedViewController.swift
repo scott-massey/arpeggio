@@ -24,7 +24,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let myCell = tableView.dequeueReusableCell(withIdentifier: "JustinCell")! as UITableViewCell
-        let stringTest = "Test Post"
+        let stringTest = "Testing post"
         myCell.textLabel!.text = stringTest
         return myCell
     }
