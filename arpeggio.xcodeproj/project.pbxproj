@@ -33,6 +33,8 @@
 		A8DF4AAC273F29DD004C730B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8DF4AAB273F29DD004C730B /* GoogleService-Info.plist */; };
 		A8DF4AAF27404F2D004C730B /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DF4AAE27404F2D004C730B /* Crypto.swift */; };
 		A8DF4AB1274059CB004C730B /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DF4AB0274059CB004C730B /* Firebase.swift */; };
+		BE834957274486CC000C344A /* PostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE834956274486CC000C344A /* PostsViewController.swift */; };
+		BE83495927448A7F000C344A /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE83495827448A7F000C344A /* FeedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		A8DF4AAE27404F2D004C730B /* Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		A8DF4AB0274059CB004C730B /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		BB57A38D2FD4D2BC4998D0D5 /* Pods_arpeggio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_arpeggio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE834956274486CC000C344A /* PostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostsViewController.swift; path = arpeggio/Views/PostsViewController.swift; sourceTree = SOURCE_ROOT; };
+		BE83495827448A7F000C344A /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedViewController.swift; path = arpeggio/Views/FeedViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,8 @@
 		A8DF4AA6273F06DB004C730B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BE83495827448A7F000C344A /* FeedViewController.swift */,
+				BE834956274486CC000C344A /* PostsViewController.swift */,
 				A8DF4AA9273F0C9B004C730B /* ProfileController.swift */,
 				A82DB14127388FF40032FF21 /* LoginController.swift */,
 				2A3760D42743430E00A204AA /* PlaylistCollectionViewCell.swift */,
@@ -306,9 +312,11 @@
 				A82DB13E27388FF40032FF21 /* AppDelegate.swift in Sources */,
 				2A3760DB2744122B00A204AA /* FollowingDisplayTableViewCell.swift in Sources */,
 				A82DB14027388FF40032FF21 /* SceneDelegate.swift in Sources */,
+				BE83495927448A7F000C344A /* FeedViewController.swift in Sources */,
 				2A3760E12744181700A204AA /* FollowersSearchViewController.swift in Sources */,
 				A82DB14827388FF40032FF21 /* arpeggio.xcdatamodeld in Sources */,
 				A8DF4AAF27404F2D004C730B /* Crypto.swift in Sources */,
+				BE834957274486CC000C344A /* PostsViewController.swift in Sources */,
 				2A9534F527443FA9009541E1 /* Followers.swift in Sources */,
 				2A3760E727441BCA00A204AA /* FirebaseUserDetails.swift in Sources */,
 				A8DF4AAA273F0C9B004C730B /* ProfileController.swift in Sources */,
