@@ -11,5 +11,7 @@ target 'arpeggio' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
+  pod 'pop', :git => 'https://github.com/facebook/pop.git'
+  pod "Koloda", :git => 'https://github.com/Yalantis/Koloda.git'
 
 end
