@@ -13,14 +13,14 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     
-    var data: [String] = []
+    var followingInfo: [FirebaseUserDetails] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setupTableView()
-        updateData()
+        //updateData()
     }
     
     func setupTableView() {
@@ -33,29 +33,62 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func updateData() {
-        data = Followers.shared.uidList
-        print(data)
-        tableView.reloadData()
+        followingInfo = []
+        guard let fbUser = Spotify.shared.currentFBUser else { return }
+        
+        Spotify.shared.databaseRef
+            .child("users")
+            .child(fbUser.uid)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                let value = snapshot.value as? NSDictionary
+
+                if let unwrappedDictionary = value {
+                    let currentFollowingDictionary:[String:String] = unwrappedDictionary["following"] as? [String:String] ?? [:]
+                    let data = Array(currentFollowingDictionary.keys)
+                    
+                    
+                    for uid in data {
+                        Spotify.shared.databaseRef
+                            .child("users")
+                            .child(uid)
+                            .observeSingleEvent(of: .value, with: { snapshot in
+                                let result = snapshot.value as? NSDictionary
+                                
+                                if let unwrappedDict = result {
+                                    let displayName = unwrappedDict["displayName"] as? String ?? ""
+                                    let profileURL = unwrappedDict["profileURL"] as? String ?? ""
+                                    let spotifyUserURI = unwrappedDict["spotifyUserURI"] as? String ?? ""
+                                    
+                                    self.followingInfo.append(FirebaseUserDetails(displayName: displayName, imageURL: profileURL, spotifyUserURI: spotifyUserURI, FBUID: uid))
+                                    
+                                    self.tableView.reloadData()
+                                    
+                                }
+                            }) {error in
+                                print(error.localizedDescription)
+                            }
+                    }
+                }
+                
+            }) { error in
+                print(error.localizedDescription)
+            }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count
+        return followingInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? FollowingDisplayTableViewCell
-        
-        let userUID = data[indexPath.row]
-        print(userUID)
-        let userDetails = Followers.shared.getUserDetails(userUID: userUID)
-        
-        //print(userDetails)
+        let userInfo = followingInfo[indexPath.row]
         
         if let unwrappedCell = cell {
-            unwrappedCell.followingName.text = userDetails.displayName
-            unwrappedCell.spotifyUserURI = userDetails.spotifyUserURI
+            unwrappedCell.followingName.text = userInfo.displayName
+            unwrappedCell.spotifyUserURI = userInfo.spotifyUserURI
+            unwrappedCell.FBUID = userInfo.FBUID
             
-            let imageURL = URL(string: userDetails.imageURL)
+            let imageURL = URL(string: userInfo.imageURL)
             
             do {
                 if let unwrappedImageURL = imageURL {
@@ -69,7 +102,7 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
             
             return unwrappedCell
         }
-        
+                
         return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     }
     
