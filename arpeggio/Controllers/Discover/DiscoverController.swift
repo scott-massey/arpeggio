@@ -18,6 +18,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     var songs: [Song] = []
     var albumCovers: [String] = []
     var likedSongs: [String] = []
+    var userURI: SpotifyURIConvertible?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         // Do any additional setup after loading the view.
         cardSwiper.dataSource = self
         cardSwiper.delegate = self
+        createDiscoverPlaylist()
         fetchData()
     }
     
@@ -168,15 +170,19 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         return CGFloat(arc4random()) / CGFloat(UInt32.max)
 
     }
-    func newTextView(text: String, y: Int) -> UIView {
-        let theTextFrame = CGRect(x: Int(view.frame.midX) - 150, y: y, width: 300, height: 30)
-        let textView = UILabel(frame: theTextFrame)
-        textView.text = text
-        textView.textAlignment = .center
-        textView.textColor = .black
-        return textView
-    }
+    func createDiscoverPlaylist() {
+        let now = Date()
 
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .medium
+
+        let datetime = formatter.string(from: now)
+        let playlistName = "Arpeggio Discover Session \(datetime)"
+        let playlistDescription = ""
+        let playlistDetails = PlaylistDetails(name: playlistName, description: playlistDescription)
+        //Spotify.shared.api.createPlaylist(for: <#T##SpotifyURIConvertible#>, PlaylistDetails)
+    }
     /*
     // MARK: - Navigation
 
