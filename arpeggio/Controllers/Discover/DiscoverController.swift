@@ -17,8 +17,9 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     var recommended: RecommendationsResponse!
     var songs: [Song] = []
     var albumCovers: [String] = []
-    var likedSongs: [String] = []
+    var likedSongs: [SpotifyURIConvertible] = []
     var userURI: SpotifyURIConvertible?
+    var spotifyCreatedPlaylist: Playlist<PlaylistItems>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,6 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         // Do any additional setup after loading the view.
         cardSwiper.dataSource = self
         cardSwiper.delegate = self
-        createDiscoverPlaylist()
         fetchData()
     }
     
@@ -78,12 +78,18 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection){
         if direction == SwipeResultDirection.right {
                 // implement your functions or whatever here
-            likedSongs.append(songs[index].id)
+            likedSongs.append("spotify:track:\(songs[index].id)")
+            print(likedSongs)
                print("user swiped right")
            } else if direction == .left {
            // implement your functions or whatever here
                print("user swiped left")
            }
+    }
+    func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+        if likedSongs.count != 0 {
+            createDiscoverPlaylist()
+        }
     }
 
     func fetchData() {
@@ -179,9 +185,38 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
 
         let datetime = formatter.string(from: now)
         let playlistName = "Arpeggio Discover Session \(datetime)"
-        let playlistDescription = ""
+        let playlistDescription = "Play from your Arpeggio Discover Session on \(datetime)"
         let playlistDetails = PlaylistDetails(name: playlistName, description: playlistDescription)
-        //Spotify.shared.api.createPlaylist(for: <#T##SpotifyURIConvertible#>, PlaylistDetails)
+        Spotify.shared.api.createPlaylist(for: Spotify.shared.currentUser?.uri as! SpotifyURIConvertible, playlistDetails)
+            .receive(on: RunLoop.main)
+            .sink(
+                receiveCompletion: {
+                    completion in if case .failure(let error) = completion {print("couldn't create playlist: \(error)")}
+                    
+                }, receiveValue: { createdPlaylist in
+                    self.spotifyCreatedPlaylist = createdPlaylist
+                    //self.addDiscoveredSongsToPlaylist(createdPlaylist.uri)
+                    print(createdPlaylist)
+                    self.addToPlaylist(uri: createdPlaylist.uri)
+                    
+                }
+            )
+            .store(in: &Spotify.shared.cancellables)
+    }
+    
+    func addToPlaylist(uri: SpotifyURIConvertible) {
+        Spotify.shared.api.addToPlaylist(uri, uris: likedSongs)
+            .receive(on: RunLoop.main)
+            .sink(
+                receiveCompletion: {
+                    completion in if case .failure(let error) = completion {print("couldn't add to playlist: \(error)")}
+                    
+                }, receiveValue: { addedReturn in
+                    print("After add: \(addedReturn)")
+                }
+            )
+            .store(in: &Spotify.shared.cancellables)
+        
     }
     /*
     // MARK: - Navigation
