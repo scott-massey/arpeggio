@@ -14,13 +14,18 @@ import FirebaseDatabase
 
 class PostsViewController: UIViewController {
 
-    @IBOutlet weak var titleOutlet: UITextField!
-    @IBOutlet weak var artistOutlet: UITextField!
-    @IBOutlet weak var urlOutlet: UITextField!
+    @IBOutlet weak var trackInput: UITextField!
     @IBOutlet weak var captionOutlet: UITextField!
+    
+    var selectedTrack: Track?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    @IBAction func showSearch(_ sender: Any) {
+        print("feed show search")
+        performSegue(withIdentifier: "ShowSearch", sender: self)
     }
     
     @IBAction func arpeggioPost(_ sender: Any) {
@@ -30,12 +35,10 @@ class PostsViewController: UIViewController {
     
     func createFirebasePost() {
         guard let fbUser = Spotify.shared.currentFBUser else { return }
-        let postTitle = titleOutlet.text
-        let postArtist = artistOutlet.text
-        let postURL = urlOutlet.text
-        let postCaption = captionOutlet.text
+        let postURL = trackInput.text
+        let message = captionOutlet.text
         
-        let postDict = ["title": postTitle, "artist": postArtist, "url": postURL, "caption": postCaption]
+        let postDict = ["url": postURL, "message": message]
         
         Database.database().reference()
             .child("users")
@@ -44,7 +47,7 @@ class PostsViewController: UIViewController {
             .setValue([
                 "post": postDict
             ])
-        currentPosts.append(postDict)
+        //currentPosts.append(postDict)
     }
 
     /*

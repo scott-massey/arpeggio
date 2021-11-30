@@ -50,6 +50,18 @@ final class Spotify {
     var currentFBUser: User? = nil
     var databaseRef = Database.database().reference()
     
+    // MARK: Member variables to store all users. Used by "People" and "Feed"
+    var allUsersCallbacks = [String: ([FirebaseUserDetails])->()]()
+    var allUsers: [FirebaseUserDetails] = []
+    var followingInfoCallbacks = [String: ([FirebaseUserDetails]) -> ()]()
+    var followingInfo: [FirebaseUserDetails] = [] {
+        didSet {
+            for(_, callback) in followingInfoCallbacks {
+                callback(self.followingInfo)
+            }
+        }
+    }
+    
     init() {
         // Configure the loggers.
         self.api.apiRequestLogger.logLevel = .trace
@@ -84,6 +96,8 @@ final class Spotify {
         else {
             print("did NOT find authorization information in keychain")
         }
+        
+        self.fetchAllUsers()
     }
     
     func authorize() {

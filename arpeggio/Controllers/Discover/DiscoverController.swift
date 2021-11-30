@@ -128,16 +128,8 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
                     }
                 }
             }
-            if let artists = track.artists{
-                artistName = ""
-                for i in 0..<artists.count{
-                    artistName += "\(artists[i].name)"
-                    print("Artist: \(artists[i].name)")
-                    if i < (artists.count - 1) {
-                        artistName += ", "
-                    }
-                    
-                }
+            if let artists = track.artists {
+                artistName = artists.splitByComma()
             }
             if track.id != nil {
                 trackId = track.id!

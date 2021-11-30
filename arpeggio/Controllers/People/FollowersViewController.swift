@@ -21,54 +21,17 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
-        trackFollowers()
+        if (Spotify.shared.followingInfoCallbacks["followers"] == nil) {
+            Spotify.shared.followingInfoCallbacks["followers"] = self.refreshFollowing
+            refreshFollowing(following: Spotify.shared.followingInfo)
+        }
     }
     
-    func trackFollowers() {
-        guard let fbUser = Spotify.shared.currentFBUser else { return }
-        
-        Spotify.shared.databaseRef
-            .child("users")
-            .child(fbUser.uid)
-            .observe(.value, with: { snapshot in
-                self.followingInfo = []
-                
-                let value = snapshot.value as? NSDictionary
-
-                if let unwrappedDictionary = value {
-                    let currentFollowingDictionary:[String:String] = unwrappedDictionary["following"] as? [String:String] ?? [:]
-                    let data = Array(currentFollowingDictionary.keys)
-                    
-                    
-                    for uid in data {
-                        Spotify.shared.databaseRef
-                            .child("users")
-                            .child(uid)
-                            .observeSingleEvent(of: .value, with: { snapshot in
-                                let result = snapshot.value as? NSDictionary
-                                
-                                if let unwrappedDict = result {
-                                    let displayName = unwrappedDict["displayName"] as? String ?? ""
-                                    let profileURL = unwrappedDict["profileURL"] as? String ?? ""
-                                    let spotifyUserURI = unwrappedDict["spotifyUserURI"] as? String ?? ""
-                                    
-                                    self.followingInfo.append(FirebaseUserDetails(displayName: displayName, imageURL: profileURL, spotifyUserURI: spotifyUserURI, FBUID: uid))
-                                    
-                                    print("New following info: \(self.followingInfo)")
-                                    
-                                    self.tableView.reloadData()
-                                    
-                                }
-                            }) {error in
-                                print(error.localizedDescription)
-                            }
-                    }
-                }
-                
-            }) { error in
-                print(error.localizedDescription)
-            }
+    func refreshFollowing (following: [FirebaseUserDetails]) {
+        followingInfo = Spotify.shared.followingInfo
+        self.tableView.reloadData()
     }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return followingInfo.count

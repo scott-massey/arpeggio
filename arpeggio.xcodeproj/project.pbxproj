@@ -22,8 +22,14 @@
 		A82DB14827388FF40032FF21 /* arpeggio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A82DB14627388FF40032FF21 /* arpeggio.xcdatamodeld */; };
 		A82DB14A27388FF70032FF21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A82DB14927388FF70032FF21 /* Assets.xcassets */; };
 		A82DB14D27388FF70032FF21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A82DB14B27388FF70032FF21 /* LaunchScreen.storyboard */; };
+		A84EC5BE275696130028D071 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84EC5BD275696130028D071 /* FeedCell.swift */; };
+		A878DB0227569B84007BD1B5 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A878DB0127569B84007BD1B5 /* Post.swift */; };
 		A89B5A2D2748519A00192268 /* DiscoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89B5A2C2748519A00192268 /* DiscoverController.swift */; };
 		A8B8115C2748530F00083840 /* DiscoverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8115B2748530F00083840 /* DiscoverCard.swift */; };
+		A8CC90A62756CF5F00452ADE /* SearchTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8CC90A52756CF5F00452ADE /* SearchTrack.storyboard */; };
+		A8CC90A92756D03A00452ADE /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC90A82756D03A00452ADE /* SearchController.swift */; };
+		A8CC90AB2756D06000452ADE /* SearchCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC90AA2756D06000452ADE /* SearchCellController.swift */; };
+		A8CC90AD2756D3E100452ADE /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8CC90AC2756D3E100452ADE /* Array.swift */; };
 		A8DF4A95273CC3EA004C730B /* SpotifyAPI in Frameworks */ = {isa = PBXBuildFile; productRef = A8DF4A94273CC3EA004C730B /* SpotifyAPI */; };
 		A8DF4A9A273CDB3E004C730B /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = A8DF4A99273CDB3E004C730B /* KeychainAccess */; };
 		A8DF4A9C273CDD6C004C730B /* Spotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DF4A9B273CDD6C004C730B /* Spotify.swift */; };
@@ -58,8 +64,14 @@
 		A82DB14927388FF70032FF21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A82DB14C27388FF70032FF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A82DB14E27388FF70032FF21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A84EC5BD275696130028D071 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		A878DB0127569B84007BD1B5 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A89B5A2C2748519A00192268 /* DiscoverController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverController.swift; sourceTree = "<group>"; };
 		A8B8115B2748530F00083840 /* DiscoverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCard.swift; sourceTree = "<group>"; };
+		A8CC90A52756CF5F00452ADE /* SearchTrack.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchTrack.storyboard; sourceTree = "<group>"; };
+		A8CC90A82756D03A00452ADE /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		A8CC90AA2756D06000452ADE /* SearchCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCellController.swift; sourceTree = "<group>"; };
+		A8CC90AC2756D3E100452ADE /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		A8DF4A9B273CDD6C004C730B /* Spotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spotify.swift; sourceTree = "<group>"; };
 		A8DF4A9E273EFFC1004C730B /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		A8DF4AA0273F01BA004C730B /* Discover.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
@@ -135,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				2A3760E627441BCA00A204AA /* FirebaseUserDetails.swift */,
+				A878DB0127569B84007BD1B5 /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -144,6 +157,7 @@
 			children = (
 				BE83495827448A7F000C344A /* FeedViewController.swift */,
 				BE834956274486CC000C344A /* PostsViewController.swift */,
+				A84EC5BD275696130028D071 /* FeedCell.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -177,6 +191,15 @@
 			path = Discover;
 			sourceTree = "<group>";
 		};
+		A8CC90A72756D01900452ADE /* SearchTrack */ = {
+			isa = PBXGroup;
+			children = (
+				A8CC90A82756D03A00452ADE /* SearchController.swift */,
+				A8CC90AA2756D06000452ADE /* SearchCellController.swift */,
+			);
+			path = SearchTrack;
+			sourceTree = "<group>";
+		};
 		A8DF4A9D273EFFAD004C730B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +209,7 @@
 				A8DF4AA0273F01BA004C730B /* Discover.storyboard */,
 				A8DF4AA2273F0201004C730B /* People.storyboard */,
 				A8DF4AA4273F025E004C730B /* Profile.storyboard */,
+				A8CC90A52756CF5F00452ADE /* SearchTrack.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,6 +217,7 @@
 		A8DF4AA6273F06DB004C730B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A8CC90A72756D01900452ADE /* SearchTrack */,
 				A89B5A2B2748518400192268 /* Discover */,
 				A89B5A2A2748517500192268 /* Profile */,
 				A89B5A282748515700192268 /* People */,
@@ -209,6 +234,7 @@
 				A8DF4AAE27404F2D004C730B /* Crypto.swift */,
 				A8DF4A9B273CDD6C004C730B /* Spotify.swift */,
 				A8DF4AB0274059CB004C730B /* Firebase.swift */,
+				A8CC90AC2756D3E100452ADE /* Array.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -297,6 +323,7 @@
 				A8DF4A9F273EFFC1004C730B /* Feed.storyboard in Resources */,
 				A8DF4AA5273F025E004C730B /* Profile.storyboard in Resources */,
 				A82DB14527388FF40032FF21 /* Main.storyboard in Resources */,
+				A8CC90A62756CF5F00452ADE /* SearchTrack.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,11 +388,16 @@
 				BE83495927448A7F000C344A /* FeedViewController.swift in Sources */,
 				A8B8115C2748530F00083840 /* DiscoverCard.swift in Sources */,
 				2A3760E12744181700A204AA /* FollowersSearchViewController.swift in Sources */,
+				A878DB0227569B84007BD1B5 /* Post.swift in Sources */,
 				A82DB14827388FF40032FF21 /* arpeggio.xcdatamodeld in Sources */,
+				A84EC5BE275696130028D071 /* FeedCell.swift in Sources */,
 				A8DF4AAF27404F2D004C730B /* Crypto.swift in Sources */,
 				BE834957274486CC000C344A /* PostsViewController.swift in Sources */,
 				A89B5A2D2748519A00192268 /* DiscoverController.swift in Sources */,
 				2A9534F527443FA9009541E1 /* Followers.swift in Sources */,
+				A8CC90A92756D03A00452ADE /* SearchController.swift in Sources */,
+				A8CC90AB2756D06000452ADE /* SearchCellController.swift in Sources */,
+				A8CC90AD2756D3E100452ADE /* Array.swift in Sources */,
 				2A3760E727441BCA00A204AA /* FirebaseUserDetails.swift in Sources */,
 				A8DF4AAA273F0C9B004C730B /* ProfileController.swift in Sources */,
 			);

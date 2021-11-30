@@ -10,7 +10,7 @@ import SpotifyWebAPI
 
 
 extension Spotify {   
-    func firebaseAuth(spotifyUser: SpotifyUser) {
+    func firebaseAuth(spotifyUser: SpotifyUser) {        
         let email = spotifyUser.email!
         let password = spotifyUser.id.hashed(.sha256)!
         
@@ -27,6 +27,7 @@ extension Spotify {
                         return
                     }
                     self.currentFBUser = fbUser
+                    self.fetchFollowers()
                 }
             }
         }
@@ -48,6 +49,8 @@ extension Spotify {
                 "profileURL": url!,
                 "spotifyUserURI": spotifyUserURI
             ])
+        
+        self.fetchFollowers()
     }
     
     func follow(followingId: String) {
@@ -67,4 +70,87 @@ extension Spotify {
         
         self.databaseRef.child(child).removeValue()
     }
+    
+    func fetchAllUsers() {
+        self.databaseRef
+            .child("users")
+            .observe(.value, with: { snapshot in
+                self.allUsers = []
+                
+                let value = snapshot.value as? NSDictionary
+                
+                if let allUserResponse = value {
+                    for (uid , user) in allUserResponse {
+                        
+                        let userNSDictionary = user as? NSDictionary
+                        
+                        let displayName = userNSDictionary?["displayName"] as? String ?? ""
+                        let profileURL = userNSDictionary?["profileURL"] as? String ?? ""
+                        let spotifyUserURI = userNSDictionary?["spotifyUserURI"] as? String ?? ""
+                        let stringUID = uid as? String ?? ""
+                        
+                        self.allUsers.append(
+                            FirebaseUserDetails(
+                                displayName: displayName,
+                                imageURL: profileURL,
+                                spotifyUserURI:spotifyUserURI,
+                                FBUID: stringUID
+                            )
+                        )
+                    }
+                    
+                    for (_, callback) in self.allUsersCallbacks {
+                        callback(self.allUsers)
+                    }
+                }
+                
+
+                
+            }) { error in
+                print(error.localizedDescription)
+            }
+    }
+    
+    func fetchFollowers() {
+        guard let fbUser = Spotify.shared.currentFBUser else { return }
+        
+        Spotify.shared.databaseRef
+            .child("users")
+            .child(fbUser.uid)
+            .observe(.value, with: { snapshot in
+                self.followingInfo = []
+                
+                let value = snapshot.value as? NSDictionary
+
+                if let unwrappedDictionary = value {
+                    let currentFollowingDictionary:[String:String] = unwrappedDictionary["following"] as? [String:String] ?? [:]
+                    let data = Array(currentFollowingDictionary.keys)
+                    
+                    
+                    for uid in data {
+                        Spotify.shared.databaseRef
+                            .child("users")
+                            .child(uid)
+                            .observeSingleEvent(of: .value, with: { snapshot in
+                                let result = snapshot.value as? NSDictionary
+                                
+                                if let unwrappedDict = result {
+                                    let displayName = unwrappedDict["displayName"] as? String ?? ""
+                                    let profileURL = unwrappedDict["profileURL"] as? String ?? ""
+                                    let spotifyUserURI = unwrappedDict["spotifyUserURI"] as? String ?? ""
+                                    
+                                    self.followingInfo.append(FirebaseUserDetails(displayName: displayName, imageURL: profileURL, spotifyUserURI: spotifyUserURI, FBUID: uid))
+                                    
+                                }
+                            }) {error in
+                                print(error.localizedDescription)
+                            }
+                    }
+                }
+                
+            }) { error in
+                print(error.localizedDescription)
+            }
+    }
+    
 }

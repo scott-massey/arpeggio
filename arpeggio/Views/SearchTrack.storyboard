@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Search Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="SearchTrack" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="SearchController" customModule="arpeggio" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="ewh-ci-Yvg">
+                                <rect key="frame" x="0.0" y="95" width="414" height="767"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" id="yWE-vU-RXm" customClass="SearchCellController" customModule="arpeggio" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="125.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yWE-vU-RXm" id="ar9-tA-9w6">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="125.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Mv-Lj-I80">
+                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="125.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="125" id="O4T-54-nQs"/>
+                                                        <constraint firstAttribute="width" constant="125" id="bhM-Ix-g8y"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZj-CC-muw">
+                                                    <rect key="frame" x="133" y="11" width="281" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist | Album" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vxg-xc-BvO">
+                                                    <rect key="frame" x="133" y="38.5" width="281" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="5Mv-Lj-I80" secondAttribute="bottom" id="5AK-8X-qdg"/>
+                                                <constraint firstItem="SZj-CC-muw" firstAttribute="top" secondItem="ar9-tA-9w6" secondAttribute="top" constant="11" id="7FE-83-tBr"/>
+                                                <constraint firstItem="Vxg-xc-BvO" firstAttribute="top" secondItem="SZj-CC-muw" secondAttribute="bottom" constant="8" symbolic="YES" id="906-e7-TJJ"/>
+                                                <constraint firstItem="Vxg-xc-BvO" firstAttribute="leading" secondItem="5Mv-Lj-I80" secondAttribute="trailing" constant="8" symbolic="YES" id="9Kn-a3-EES"/>
+                                                <constraint firstItem="SZj-CC-muw" firstAttribute="leading" secondItem="5Mv-Lj-I80" secondAttribute="trailing" constant="8" symbolic="YES" id="BBM-af-Unm"/>
+                                                <constraint firstAttribute="trailing" secondItem="Vxg-xc-BvO" secondAttribute="trailing" id="Hsn-hM-IWk"/>
+                                                <constraint firstItem="5Mv-Lj-I80" firstAttribute="top" secondItem="ar9-tA-9w6" secondAttribute="top" id="aTr-RS-f4X"/>
+                                                <constraint firstAttribute="trailing" secondItem="SZj-CC-muw" secondAttribute="trailing" id="fms-nW-NYE"/>
+                                                <constraint firstItem="5Mv-Lj-I80" firstAttribute="leading" secondItem="ar9-tA-9w6" secondAttribute="leading" id="kW7-WQ-O2p"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="albumCover" destination="5Mv-Lj-I80" id="VrM-Cu-FaR"/>
+                                            <outlet property="artistAlbum" destination="Vxg-xc-BvO" id="Vre-kt-TbY"/>
+                                            <outlet property="songName" destination="SZj-CC-muw" id="MsI-Ps-hre"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="AiT-0j-G0r">
+                                <rect key="frame" x="0.0" y="44" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="AiT-0j-G0r" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="CCF-28-Znk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ewh-ci-Yvg" secondAttribute="trailing" id="DMP-ck-y8c"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="ewh-ci-Yvg" secondAttribute="bottom" id="evd-Kv-t1s"/>
+                            <constraint firstItem="ewh-ci-Yvg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="h7n-AY-udR"/>
+                            <constraint firstItem="ewh-ci-Yvg" firstAttribute="top" secondItem="AiT-0j-G0r" secondAttribute="bottom" id="lfF-kK-hgs"/>
+                            <constraint firstItem="AiT-0j-G0r" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="qAd-uZ-cJy"/>
+                            <constraint firstItem="AiT-0j-G0r" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="sjm-xd-xSN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="AiT-0j-G0r" id="ycs-4y-8aO"/>
+                        <outlet property="tableView" destination="ewh-ci-Yvg" id="wrX-93-Ahq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="116.51785714285714"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
