@@ -19,27 +19,20 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setupTableView()
-        //updateData()
-    }
-    
-    func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
+        trackFollowers()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        updateData()
-    }
-    
-    func updateData() {
-        followingInfo = []
+    func trackFollowers() {
         guard let fbUser = Spotify.shared.currentFBUser else { return }
         
         Spotify.shared.databaseRef
             .child("users")
             .child(fbUser.uid)
-            .observeSingleEvent(of: .value, with: { snapshot in
+            .observe(.value, with: { snapshot in
+                self.followingInfo = []
+                
                 let value = snapshot.value as? NSDictionary
 
                 if let unwrappedDictionary = value {
@@ -60,6 +53,8 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
                                     let spotifyUserURI = unwrappedDict["spotifyUserURI"] as? String ?? ""
                                     
                                     self.followingInfo.append(FirebaseUserDetails(displayName: displayName, imageURL: profileURL, spotifyUserURI: spotifyUserURI, FBUID: uid))
+                                    
+                                    print("New following info: \(self.followingInfo)")
                                     
                                     self.tableView.reloadData()
                                     
@@ -106,14 +101,24 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
         return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     }
     
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "addFollowing") {
+            let followersSearchVC = segue.destination as? FollowersSearchViewController
+            followersSearchVC?.following = followingInfo
+        } else if (segue.identifier == "seeProfile") {
+            guard let selectedIndex = tableView.indexPathsForSelectedRows?.last else {
+                return
+            }
+            
+            let selectedUser = followingInfo[selectedIndex.row]
+            let navVC = segue.destination as? UINavigationController
+            let profileVC = navVC?.viewControllers.first as? ProfileController
+            profileVC?.selectedUser = selectedUser
+            profileVC?.viewType = .following
+        }
+        
     }
-    */
+
 
 }

@@ -49,4 +49,22 @@ extension Spotify {
                 "spotifyUserURI": spotifyUserURI
             ])
     }
+    
+    func follow(followingId: String) {
+        if (followingId == "") { return }
+        guard let fbUser = Spotify.shared.currentFBUser else { return }
+        
+        let childValues = ["users/\(fbUser.uid)/following/\(followingId)": "FOLLOWING"]
+        
+        self.databaseRef.updateChildValues(childValues)
+    }
+    
+    func unFollow(userId: String) {
+        if (userId == "") { return }
+        guard let fbUser = Spotify.shared.currentFBUser else { return }
+        
+        let child = "users/\(fbUser.uid)/following/\(userId)"
+        
+        self.databaseRef.child(child).removeValue()
+    }
 }

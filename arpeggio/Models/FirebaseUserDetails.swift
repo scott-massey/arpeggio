@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct FirebaseUserDetails {
+struct FirebaseUserDetails: Equatable {
     var displayName: String
     var imageURL: String
     var spotifyUserURI: String
     var FBUID: String
+    
+    static func == (lhs: FirebaseUserDetails, rhs: FirebaseUserDetails) -> Bool {
+        return lhs.FBUID == rhs.FBUID
+    }
 }

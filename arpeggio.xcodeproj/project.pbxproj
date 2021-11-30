@@ -117,6 +117,7 @@
 		A82DB13C27388FF40032FF21 /* arpeggio */ = {
 			isa = PBXGroup;
 			children = (
+				A8480994274D8E0200284027 /* Models */,
 				A8DF4AAD27404F1C004C730B /* utils */,
 				A8DF4AA6273F06DB004C730B /* Controllers */,
 				A8DF4A9D273EFFAD004C730B /* Views */,
@@ -128,6 +129,14 @@
 				A8DF4AAB273F29DD004C730B /* GoogleService-Info.plist */,
 			);
 			path = arpeggio;
+			sourceTree = "<group>";
+		};
+		A8480994274D8E0200284027 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2A3760E627441BCA00A204AA /* FirebaseUserDetails.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A89B5A272748513E00192268 /* Feed */ = {
@@ -189,7 +198,6 @@
 				A89B5A282748515700192268 /* People */,
 				A89B5A272748513E00192268 /* Feed */,
 				A82DB14127388FF40032FF21 /* LoginController.swift */,
-				2A3760E627441BCA00A204AA /* FirebaseUserDetails.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

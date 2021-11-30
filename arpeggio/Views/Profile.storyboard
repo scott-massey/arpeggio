@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VED-or-lUI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="VED-or-lUI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -88,7 +89,7 @@
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
-                                    <action selector="logOut:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="f7m-Bz-B70"/>
+                                    <action selector="onNavPress:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="68e-Cz-HUZ"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -96,6 +97,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="blu-ey-nxx" id="88V-Sm-qKH"/>
+                        <outlet property="navBar" destination="yIT-Nq-Amf" id="Goa-Zc-6lD"/>
                         <outlet property="profileImage" destination="TeL-dU-eP6" id="bG6-Pv-cbE"/>
                     </connections>
                 </viewController>

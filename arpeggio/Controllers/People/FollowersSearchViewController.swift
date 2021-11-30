@@ -12,6 +12,8 @@ class FollowersSearchViewController: UIViewController, UITableViewDataSource, UI
     @IBOutlet weak var tableView: UITableView!
     
     var allUsers: [FirebaseUserDetails] = []
+    var following: [FirebaseUserDetails] = []
+    var notFollowing: [FirebaseUserDetails] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +31,9 @@ class FollowersSearchViewController: UIViewController, UITableViewDataSource, UI
     func getAllUsers() {
         Spotify.shared.databaseRef
             .child("users")
-            .observeSingleEvent(of: .value, with: { snapshot in
+            .observe(.value, with: { snapshot in
+                self.allUsers = []
+                
                 let value = snapshot.value as? NSDictionary
                 
                 if let allUserResponse = value {
@@ -52,6 +56,10 @@ class FollowersSearchViewController: UIViewController, UITableViewDataSource, UI
                         )
                     }
                 }
+                self.notFollowing = self.allUsers.filter { user in
+                    return !self.following.contains(user) && user.FBUID != Spotify.shared.currentFBUser?.uid
+                }
+                
                 self.tableView.reloadData()
             }) { error in
                 print(error.localizedDescription)
@@ -59,13 +67,13 @@ class FollowersSearchViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allUsers.count
+        return notFollowing.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? FollowingAddTableViewCell
         
-        let userDetails = allUsers[indexPath.row]
+        let userDetails = notFollowing[indexPath.row]
         
         if let unwrappedCell = cell {
             unwrappedCell.displayName.text = userDetails.displayName
@@ -90,14 +98,20 @@ class FollowersSearchViewController: UIViewController, UITableViewDataSource, UI
         return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if (segue.identifier == "seeProfile") {
+            guard let selectedIndex = tableView.indexPathsForSelectedRows?.last else {
+                return
+            }
+            
+            let selectedUser = notFollowing[selectedIndex.row]
+            let navVC = segue.destination as? UINavigationController
+            let profileVC = navVC?.viewControllers.first as? ProfileController
+            profileVC?.selectedUser = selectedUser
+            profileVC?.viewType = .addFollowing
+        }
     }
-    */
-
 }
