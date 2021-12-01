@@ -159,16 +159,6 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
                         }
                     }
                 }
-                if let artists = track.artists{
-                    artistName = ""
-                    for i in 0..<artists.count{
-                        artistName += "\(artists[i].name)"
-                        if i < (artists.count - 1) {
-                            artistName += ", "
-                        }
-                        
-                    }
-                }
                 if track.id != nil {
                     trackId = track.id!
                 }
@@ -176,6 +166,11 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
                 let song = Song(albumCover: UIImage(named: "song-placeholder"), title: title, artist: artistName, album: albumName, id: trackId, preview: track.previewURL)
                 songs.append(song)
                 
+
+            }
+            if let artists = track.artists {
+                artistName = artists.splitByComma()
+
             }
         }
         cacheImages()

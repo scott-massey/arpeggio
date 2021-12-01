@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dg3-mj-aUY">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Dg3-mj-aUY">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,7 +22,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="120" id="6eC-3g-NhF" customClass="FollowingDisplayTableViewCell" customModule="arpeggio" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="120"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6eC-3g-NhF" id="OYq-R9-YIM" customClass="FollowingDisplayTableViewCell" customModule="arpeggio" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
@@ -57,6 +58,7 @@
                                             <outlet property="followingName" destination="s0A-jh-Al5" id="b3h-U0-diD"/>
                                             <outlet property="imageView" destination="xFd-0B-tiJ" id="YE3-yb-S4g"/>
                                             <outlet property="profileImageView" destination="xFd-0B-tiJ" id="amo-RN-YKA"/>
+                                            <segue destination="6Gt-hY-DIS" kind="show" identifier="seeProfile" id="5th-SQ-pQF"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -71,14 +73,14 @@
                             <constraint firstItem="77C-B8-T5k" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="fQi-X2-Yxh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Followers" id="gwQ-n8-BeD">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="tjE-yh-sJa">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="wE1-ts-0Kd">
-                                <rect key="frame" x="346" y="7" width="48" height="30"/>
+                    <navigationItem key="navigationItem" title="Following" id="gwQ-n8-BeD">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" style="plain" id="tjE-yh-sJa">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wE1-ts-0Kd">
+                                <rect key="frame" x="376" y="11" width="18" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Search"/>
+                                <state key="normal" image="plus" catalog="system"/>
                                 <connections>
-                                    <segue destination="Ubv-Mv-nbG" kind="show" id="iEZ-MS-OcC"/>
+                                    <segue destination="Ubv-Mv-nbG" kind="show" identifier="addFollowing" id="iEZ-MS-OcC"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -112,7 +114,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="96" id="GOO-lE-G1n" customClass="FollowingAddTableViewCell" customModule="arpeggio" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="96"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="96"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GOO-lE-G1n" id="JHh-1z-rNK">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
@@ -154,6 +156,7 @@
                                         <connections>
                                             <outlet property="displayName" destination="r8A-DE-K5C" id="vgU-hr-9Dp"/>
                                             <outlet property="profileImageView" destination="pOA-gF-BCN" id="3I0-Co-OAi"/>
+                                            <segue destination="6Gt-hY-DIS" kind="show" identifier="seeProfile" id="vG8-zD-SgC"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -199,7 +202,20 @@
             </objects>
             <point key="canvasLocation" x="-13.043478260869566" y="116.51785714285714"/>
         </scene>
+        <!--Profile-->
+        <scene sceneID="BRr-yM-Z5g">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Profile" storyboardName="Profile" id="6Gt-hY-DIS" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="tKg-ic-5ac"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H8K-Pu-NvV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1314" y="694"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5th-SQ-pQF"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="person.2.fill" catalog="system" width="128" height="80"/>
         <image name="plus" catalog="system" width="128" height="113"/>
