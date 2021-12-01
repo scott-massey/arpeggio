@@ -9,9 +9,34 @@
     </dependencies>
     <scenes>
         <!--Discover-->
+        <scene sceneID="hGH-zP-CWk">
+            <objects>
+                <viewController storyboardIdentifier="Discover" id="3Ej-Lb-VV8" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EW0-rE-PxT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j6-YI-vAt">
+                                <rect key="frame" x="184" y="253" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="REp-9k-oym"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Discover" image="magnifyingglass" catalog="system" id="z8G-Ha-WA8"/>
+                    <navigationItem key="navigationItem" id="NeY-q7-vxY"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AzX-HG-ujH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1042" y="117"/>
+        </scene>
+        <!--Discover-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="Discover" title="Discover" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="DiscoverController" customModule="arpeggio" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DiscoverSession" title="Discover" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="DiscoverController" customModule="arpeggio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -57,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="897.10144927536237" y="116.51785714285714"/>
+            <point key="canvasLocation" x="1997" y="117"/>
         </scene>
         <!--Discover-->
         <scene sceneID="coC-aB-fTe">
@@ -71,7 +96,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="V6e-ob-LMI"/>
+                        <segue destination="3Ej-Lb-VV8" kind="relationship" relationship="rootViewController" id="sYe-Bj-vuq"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wsh-94-C0d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

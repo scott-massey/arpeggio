@@ -23,7 +23,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     var spotifyCreatedPlaylist: Playlist<PlaylistItems>?
     var player = AVAudioPlayer()
     var userAttributes = [0.5,0.5,0.5,0.5,0.5]
-    var seedTracks: [SpotifyURIConvertible] = []
+    var seedTracks: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,20 +76,22 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         
         return discoverCard
     }
-    @IBAction func newSession(_ sender: Any) {
-        player.stop()
-        songs = []
-        self.cardSwiper.reloadData()
-        if likedSongs.count != 0 {
-            createDiscoverPlaylist()
-            //updateUserAttributes()
-            updateSeed()
-        }
-        setup()
-    }
+//    @IBAction func newSession(_ sender: Any) {
+//        player.stop()
+//        songs = []
+//        albumCovers = []
+//        self.cardSwiper.reloadData()
+//        if likedSongs.count != 0 {
+//            createDiscoverPlaylist()
+//            //updateUserAttributes()
+//            updateSeed()
+//        }
+//        setup()
+//    }
     @IBAction func endSession(_ sender: Any) {
         player.stop()
         songs = []
+        albumCovers = []
         self.cardSwiper.reloadData()
         if likedSongs.count != 0 {
             createDiscoverPlaylist()
@@ -122,7 +124,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         playSong(url: songs[koloda.currentCardIndex].preview!)
     }
     func setup(){
-        seedTracks = UserDefaults.standard.object(forKey: "userSeedTracks") as? [SpotifyURIConvertible] ?? []
+        seedTracks = UserDefaults.standard.object(forKey: "userSeedTracks") as? [String] ?? []
         print("Seed Tracks: \(seedTracks)")
         print(UserDefaults.standard.object(forKey: "userSeedTracks") ?? "oopsie whoopsie")
         if seedTracks.isEmpty {
@@ -146,6 +148,9 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
             )
             .store(in: &Spotify.shared.cancellables)
             
+        }
+        else {
+            fetchData()
         }
         
     }
