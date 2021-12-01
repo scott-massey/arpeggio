@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ur7-Xq-Eqe">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
@@ -25,13 +25,79 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Discover" image="magnifyingglass" catalog="system" id="b7A-lM-WyB"/>
+                    <navigationItem key="navigationItem" id="HeU-HI-JXm">
+                        <barButtonItem key="rightBarButtonItem" title="Customize Discover Session" id="bbN-QC-1je">
+                            <connections>
+                                <segue destination="pQ7-uq-efY" kind="presentation" id="Uih-ur-ZLi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cardSwiper" destination="HsR-T6-kIh" id="Q8s-Lp-05m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="897.10144927536237" y="116.51785714285714"/>
+        </scene>
+        <!--Search Controller-->
+        <scene sceneID="cpb-gt-ROC">
+            <objects>
+                <viewController id="pQ7-uq-efY" customClass="SearchController" customModule="arpeggio" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9G0-Fe-MOl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Qys-2S-tNV">
+                                <rect key="frame" x="0.0" y="10" width="414" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="whq-RE-E0Z"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Rg-If-7a3">
+                                <rect key="frame" x="0.0" y="50" width="414" height="758"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tub-iL-nwO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Qys-2S-tNV" firstAttribute="leading" secondItem="tub-iL-nwO" secondAttribute="leading" id="Esk-kN-wRG"/>
+                            <constraint firstItem="0Rg-If-7a3" firstAttribute="top" secondItem="Qys-2S-tNV" secondAttribute="bottom" id="HL3-Iw-ej1"/>
+                            <constraint firstItem="Qys-2S-tNV" firstAttribute="trailing" secondItem="tub-iL-nwO" secondAttribute="trailing" id="VZJ-tr-VZ9"/>
+                            <constraint firstItem="Qys-2S-tNV" firstAttribute="top" secondItem="tub-iL-nwO" secondAttribute="top" constant="10" id="Vc7-L1-DSg"/>
+                            <constraint firstItem="tub-iL-nwO" firstAttribute="trailing" secondItem="0Rg-If-7a3" secondAttribute="trailing" id="ZLs-t9-vEo"/>
+                            <constraint firstItem="tub-iL-nwO" firstAttribute="bottom" secondItem="0Rg-If-7a3" secondAttribute="bottom" id="hSF-C4-HPg"/>
+                            <constraint firstItem="0Rg-If-7a3" firstAttribute="leading" secondItem="tub-iL-nwO" secondAttribute="leading" id="m0Y-aU-vvr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="searchBar" destination="Qys-2S-tNV" id="GyO-L5-pqd"/>
+                        <outlet property="songList" destination="0Rg-If-7a3" id="AvW-2t-Fu8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jqg-8q-wDT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1603" y="131"/>
+        </scene>
+        <!--Discover-->
+        <scene sceneID="coC-aB-fTe">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ur7-Xq-Eqe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Discover" image="magnifyingglass" catalog="system" id="b7A-lM-WyB"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ylU-Z6-g2W">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="V6e-ob-LMI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wsh-94-C0d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-13.043478260869566" y="116.51785714285714"/>
         </scene>

@@ -8,6 +8,7 @@
 import UIKit
 import Koloda
 import SpotifyWebAPI
+import AVFoundation
 
 class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSource {
     @IBOutlet weak var cardSwiper: KolodaView!
@@ -20,6 +21,9 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     var likedSongs: [SpotifyURIConvertible] = []
     var userURI: SpotifyURIConvertible?
     var spotifyCreatedPlaylist: Playlist<PlaylistItems>?
+    var player = AVAudioPlayer()
+    var userAttributes = UserDefaults.standard.object(forKey: "userAttributes") as? [Float] ?? [0.5,0.5,0.5,0.5,0.5]
+    var topTracks: [SpotifyURIConvertible] = ["spotify:track:0LDiaSudHOYJ8e473mv5uY"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +31,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         // Do any additional setup after loading the view.
         cardSwiper.dataSource = self
         cardSwiper.delegate = self
-        fetchData()
+        setup()
     }
     
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
@@ -69,6 +73,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         textView.textColor = textColor
         textView.font = UIFont.systemFont(ofSize: 16)
         discoverCard.addSubview(textView)
+        
         return discoverCard
     }
     
@@ -79,21 +84,46 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         if direction == SwipeResultDirection.right {
                 // implement your functions or whatever here
             likedSongs.append("spotify:track:\(songs[index].id)")
-            print(likedSongs)
-               print("user swiped right")
            } else if direction == .left {
            // implement your functions or whatever here
                print("user swiped left")
            }
     }
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+        player.stop()
         if likedSongs.count != 0 {
             createDiscoverPlaylist()
+            //updateUserAttributes()
         }
     }
-
+    func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
+        playSong(url: songs[koloda.currentCardIndex].preview!)
+    }
+    func setup(){
+        Spotify.shared.api.currentUserTopTracks(TimeRange.shortTerm, limit: 5)
+            .receive(on: RunLoop.main)
+            .sink(
+                receiveCompletion: {
+                    completion in if case .failure(let error) = completion {print("couldn't get top tracks: \(error)")}
+                    self.fetchData()
+                }, receiveValue: { topTracksResponse in
+                    self.topTracks = []
+                    for track in topTracksResponse.items {
+                        if track.id != nil {
+                            self.topTracks.append("spotify:track:\(track.id!)")
+                        }
+                    }
+                    print("Top Tracks: \(self.topTracks)")
+                    self.fetchData()
+                }
+            )
+            .store(in: &Spotify.shared.cancellables)
+        
+    }
     func fetchData() {
-        Spotify.shared.api.recommendations(TrackAttributes(seedTracks: ["spotify:track:0LDiaSudHOYJ8e473mv5uY"]))
+        //acousticness: AttributeRange(min: Double(userAttributes[0]) - 0.05, target: Double(userAttributes[0]), max: Double(userAttributes[0]) + 0.05)
+        print(userAttributes)
+        Spotify.shared.api.recommendations(TrackAttributes(seedTracks: topTracks))
             .receive(on: RunLoop.main)
             .sink(
                 receiveCompletion: {
@@ -102,7 +132,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
                 }, receiveValue: { recommended in
                     self.recommended = recommended
                     self.parseData(response: recommended)
-                    //print(recommended)
+                
                     
                 }
             )
@@ -115,41 +145,39 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         var albumName = ""
         var trackId = ""
         for track in tracks{
-            print("Track: \(track)")
-            let title = track.name
-            if let album = track.album {
-                albumName = album.name
-                if let images = album.images {
-                    if images.isEmpty{
-                        albumCovers.append("")
-                    }
-                    else {
-                        albumCovers.append(images[0].url.absoluteString)
+            if track.previewURL != nil  {
+                //print("PreviewURL: \(track.previewURL)")
+                let title = track.name
+                if let album = track.album {
+                    albumName = album.name
+                    if let images = album.images {
+                        if images.isEmpty{
+                            albumCovers.append("")
+                        }
+                        else {
+                            albumCovers.append(images[0].url.absoluteString)
+                        }
                     }
                 }
-            }
-            if let artists = track.artists{
-                artistName = ""
-                for i in 0..<artists.count{
-                    artistName += "\(artists[i].name)"
-                    print("Artist: \(artists[i].name)")
-                    if i < (artists.count - 1) {
-                        artistName += ", "
+                if let artists = track.artists{
+                    artistName = ""
+                    for i in 0..<artists.count{
+                        artistName += "\(artists[i].name)"
+                        if i < (artists.count - 1) {
+                            artistName += ", "
+                        }
+                        
                     }
-                    
                 }
+                if track.id != nil {
+                    trackId = track.id!
+                }
+                
+                let song = Song(albumCover: UIImage(named: "song-placeholder"), title: title, artist: artistName, album: albumName, id: trackId, preview: track.previewURL)
+                songs.append(song)
+                
             }
-            if track.id != nil {
-                trackId = track.id!
-            }
-            
-            let song = Song(albumCover: UIImage(named: "song-placeholder"), title: title, artist: artistName, album: albumName, id: trackId)
-            songs.append(song)
         }
-            
-//        for url in albumCovers{
-//            print("ALBUM COVER URL: \(url)")
-//        }
         cacheImages()
     }
     
@@ -166,15 +194,53 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         }
         self.cardSwiper.reloadData()
     }
-    func randomColor() -> UIColor {
-
-          return UIColor(red: randomFloat(), green: randomFloat(), blue: randomFloat(), alpha: 1)
-
-      }
-    func randomFloat() -> CGFloat {
-
-        return CGFloat(arc4random()) / CGFloat(UInt32.max)
-
+    func updateUserAttributes() {
+        Spotify.shared.api.tracksAudioFeatures(likedSongs)
+            .receive(on: RunLoop.main)
+            .sink(
+                receiveCompletion:  {
+                    completion in if case .failure(let error) = completion {print("couldn't find track attributes: \(error)")}
+                }, receiveValue: { attributes in
+                    self.handleAttributes(attributes: attributes)
+                }
+            )
+            .store(in: &Spotify.shared.cancellables)
+    }
+    func handleAttributes(attributes: [AudioFeatures?]){
+        var acousticness = 0.0
+        var danceability = 0.0
+        var energy = 0.0
+        var instrumentalness = 0.0
+        var valence = 0.0
+        for data in attributes {
+            if let _ = data?.acousticness {
+                acousticness += data!.acousticness
+            }
+            if let _ = data?.danceability {
+                danceability += data!.danceability
+            }
+            if let _ = data?.energy {
+                energy += data!.energy
+            }
+            if let _ = data?.instrumentalness {
+                instrumentalness += data!.instrumentalness
+            }
+            if let _ = data?.valence {
+                valence += data!.valence
+            }
+        }
+   
+        let newAttributes = [acousticness/Double(attributes.count),danceability/Double(attributes.count),energy/Double(attributes.count),instrumentalness/Double(attributes.count), valence/Double(attributes.count)]
+        let oldAttributes = UserDefaults.standard.object(forKey: "userAttributes") as? [Double] ?? [0.5,0.5,0.5,0.5,0.5]
+        var updatedAttributes = [0.0,0.0,0.0,0.0,0.0]
+        for i in 0...4{
+            let weightedNew = 0.4*newAttributes[i]
+            let weightedOld = 0.6*oldAttributes[i]
+            updatedAttributes[i] = Double(weightedOld + weightedNew)
+        }
+        print(updatedAttributes)
+        UserDefaults.standard.setValue(updatedAttributes, forKey: "userAttributes")
+        
     }
     func createDiscoverPlaylist() {
         let now = Date()
@@ -185,7 +251,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
 
         let datetime = formatter.string(from: now)
         let playlistName = "Arpeggio Discover Session \(datetime)"
-        let playlistDescription = "Play from your Arpeggio Discover Session on \(datetime)"
+        let playlistDescription = "Playlist from your Arpeggio Discover Session on \(datetime)"
         let playlistDetails = PlaylistDetails(name: playlistName, description: playlistDescription)
         Spotify.shared.api.createPlaylist(for: Spotify.shared.currentUser?.uri as! SpotifyURIConvertible, playlistDetails)
             .receive(on: RunLoop.main)
@@ -218,6 +284,38 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
             .store(in: &Spotify.shared.cancellables)
         
     }
+    func playSong(url: URL) {
+        downloadFileFromURL(url: url)
+    }
+    func downloadFileFromURL(url: URL){
+            var downloadTask = URLSessionDownloadTask()
+            downloadTask = URLSession.shared.downloadTask(with: url, completionHandler: {
+                customURL, response, error in
+
+                self.play(url: customURL!)
+
+            })
+
+            downloadTask.resume()
+
+
+        }
+
+    func play(url: URL) {
+
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player.prepareToPlay()
+            player.play()
+
+        }
+        catch{
+            print(error)
+        }
+        
+    }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -261,11 +359,12 @@ struct Song {
     let artist: String?
     let album: String?
     let id: String
+    let preview: URL?
 }
-struct ArpeggioAttributes: Decodable {
-    let danceability: Float? //Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.
-    let energy: Float? //Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.
-    let instrumentalness: Float? //Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.
-    let loudness: Float? //The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typically range between -60 and 0 db.
-    let valence: Float? //A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
+struct ArpeggioAttributes {
+    var acousticness: Double? //A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.
+    var danceability: Double? //Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.
+    var energy: Double? //Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.
+    var instrumentalness: Double? //Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.
+    var valence: Double? //A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).
 }
