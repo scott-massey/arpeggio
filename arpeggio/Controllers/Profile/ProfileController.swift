@@ -21,9 +21,11 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
     )
     
     @IBOutlet weak var profileImage: UIImageView!
-    
+    @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var selectedUser: FirebaseUserDetails?
+    var viewType: ProfileViewType = .ownProfile
     
     var cancellables: Set<AnyCancellable> = []
     var playlists: [Playlist<PlaylistItemsReference>] = []
@@ -33,19 +35,30 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
 
         // Do any additional setup after loading the view.
         
-        setupCollectionView()
-        getProfileImage()
-        getPlaylists()
-        
-    }
-    
-    func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+
+        getProfileImage()
+        getPlaylists()
+    }
+        
+    override func viewWillAppear(_ animated: Bool) {
+        if let _ = selectedUser {
+            navBar.title = "\(selectedUser?.displayName ?? "Unknown")'s Profile"
+            guard let button = navBar.rightBarButtonItem?.customView as? UIButton else { return }
+            switch viewType {
+            case .following:
+                button.setTitle("Unfollow", for: .normal)
+            default:
+                button.setTitle("Follow", for: .normal)
+            }
+        } else {
+            navBar.title = "Your Profile"
+        }
     }
     
     func getProfileImage() {
-        guard let unwrappedProfileImageUrl = Spotify.shared.currentUser?.images?[0].url
+        guard let unwrappedProfileImageUrl = selectedUser == nil ? Spotify.shared.currentUser?.images?[0].url : URL(string: selectedUser!.imageURL)
         else {
             print("Error: could not retrieve profile image")
             return
@@ -66,12 +79,14 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
             return
         }
         
+        let uri = selectedUser == nil ? user.uri : selectedUser!.spotifyUserURI
+        
         let activityIndicator = UIActivityIndicatorView(style: .large)
         collectionView.addSubview(activityIndicator)
         activityIndicator.frame = collectionView.bounds
         activityIndicator.startAnimating()
         
-        Spotify.shared.api.userPlaylists(for: user.uri, limit: 3)
+        Spotify.shared.api.userPlaylists(for: uri, limit: 3)
             .receive(on: RunLoop.main)
             .sink(
                 receiveCompletion: { completion in
@@ -88,14 +103,25 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
             .store(in: &cancellables)
     }
     
-    @IBAction func logOut(_ sender: Any) {
-        Spotify.shared.api.authorizationManager.deauthorize()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-           let loginController = storyboard.instantiateViewController(identifier: "Login")
-           
-           // This is to get the SceneDelegate object from your view controller
-           // then call the change root view controller function to change to main tab bar
-           (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginController)
+    @IBAction func onNavPress(_ sender: Any) {
+        switch viewType {
+        case .addFollowing:
+            Spotify.shared.follow(followingId: selectedUser?.FBUID ?? "")
+            break
+        case .following:
+            Spotify.shared.unFollow(userId: selectedUser?.FBUID ?? "")
+            break
+        default:
+            Spotify.shared.api.authorizationManager.deauthorize()
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+               let loginController = storyboard.instantiateViewController(identifier: "Login")
+               
+               // This is to get the SceneDelegate object from your view controller
+               // then call the change root view controller function to change to main tab bar
+               (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginController)
+            break
+        }
+
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -167,4 +193,8 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
             }
         }
     }
+}
+
+enum ProfileViewType {
+    case following, addFollowing, ownProfile
 }

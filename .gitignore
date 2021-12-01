@@ -2,3 +2,4 @@ osx
 Pods
 *.xcuserdata
 *.xcuserdatad
+.DS_Store
