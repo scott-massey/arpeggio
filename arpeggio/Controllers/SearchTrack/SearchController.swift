@@ -33,6 +33,19 @@ class SearchController: UIViewController, UITableViewDelegate, UITableViewDataSo
         return myCell
     }
     
+    /* MARK: PLAN
+     Create callback when item is selected to trigger back action
+     during segue, send selected value to parent
+     You'll likely need to cast the presentingViewController as "PostsViewController"
+     See Followers (either) for an example of how this works
+    */
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedTrack = searchResults[indexPath.row]
+        // use presentingViewController and cast as parent VC (either discover or search)
+        // then set a member variable of the parent view controller 
+        dismiss(animated: true)
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let query = searchBar.text ?? ""
         
@@ -72,23 +85,4 @@ class SearchController: UIViewController, UITableViewDelegate, UITableViewDataSo
         searchBar.delegate = self
         imageCache["default"] = UIImage(named: "song-placeholder")
     }
-    
-    /* MARK: PLAN
-     Create callback when item is selected to trigger back action
-     during segue, send selected value to parent
-     You'll likely need to cast the destination as "PostsViewController"
-     See Followers (either) for an example of how this works
-    */
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
