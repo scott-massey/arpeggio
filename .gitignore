@@ -1,2 +1,4 @@
 osx
 Pods
+*.xcuserdata
+*.xcuserdatad
