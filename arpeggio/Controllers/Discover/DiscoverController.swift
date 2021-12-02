@@ -24,6 +24,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     var player = AVAudioPlayer()
     var userAttributes = [0.5,0.5,0.5,0.5,0.5]
     var seedTracks: [String] = []
+    var customSeed: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,15 +90,9 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
 //        setup()
 //    }
     @IBAction func endSession(_ sender: Any) {
-        player.stop()
-        songs = []
-        albumCovers = []
         self.cardSwiper.reloadData()
-        if likedSongs.count != 0 {
-            createDiscoverPlaylist()
-            //updateUserAttributes()
-            updateSeed()
-        }
+        kolodaDidRunOutOfCards(cardSwiper)
+        
     }
     
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
@@ -117,39 +112,48 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         if likedSongs.count != 0 {
             createDiscoverPlaylist()
             //updateUserAttributes()
-            updateSeed()
+            if(!customSeed) {
+                updateSeed()
+            }
         }
+        self.navigationController?.popViewController(animated: true)
     }
     func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
         playSong(url: songs[koloda.currentCardIndex].preview!)
     }
     func setup(){
-        seedTracks = UserDefaults.standard.object(forKey: "userSeedTracks") as? [String] ?? []
-        print("Seed Tracks: \(seedTracks)")
-        print(UserDefaults.standard.object(forKey: "userSeedTracks") ?? "oopsie whoopsie")
-        if seedTracks.isEmpty {
-            Spotify.shared.api.currentUserTopTracks(TimeRange.shortTerm, limit: 5)
-            .receive(on: RunLoop.main)
-            .sink(
-                receiveCompletion: {
-                    completion in if case .failure(let error) = completion {print("couldn't get top tracks: \(error)")}
-                    self.seedTracks = ["spotify:track:0LDiaSudHOYJ8e473mv5uY"]
-                    self.fetchData()
-                }, receiveValue: { topTracksResponse in
-                    self.seedTracks = []
-                    for track in topTracksResponse.items {
-                        if track.id != nil {
-                            self.seedTracks.append("spotify:track:\(track.id!)")
+        if(!customSeed) {
+            seedTracks = UserDefaults.standard.object(forKey: "userSeedTracks") as? [String] ?? []
+            print("Seed Tracks: \(seedTracks)")
+            print(UserDefaults.standard.object(forKey: "userSeedTracks") ?? "oopsie whoopsie")
+            if seedTracks.isEmpty {
+                Spotify.shared.api.currentUserTopTracks(TimeRange.shortTerm, limit: 5)
+                .receive(on: RunLoop.main)
+                .sink(
+                    receiveCompletion: {
+                        completion in if case .failure(let error) = completion {print("couldn't get top tracks: \(error)")}
+                        self.seedTracks = ["spotify:track:0LDiaSudHOYJ8e473mv5uY"]
+                        self.fetchData()
+                    }, receiveValue: { topTracksResponse in
+                        self.seedTracks = []
+                        for track in topTracksResponse.items {
+                            if track.id != nil {
+                                self.seedTracks.append("spotify:track:\(track.id!)")
+                            }
                         }
+                        print("Top Tracks: \(self.seedTracks)")
+                        self.fetchData()
                     }
-                    print("Top Tracks: \(self.seedTracks)")
-                    self.fetchData()
-                }
-            )
-            .store(in: &Spotify.shared.cancellables)
-            
+                )
+                .store(in: &Spotify.shared.cancellables)
+                
+            }
+            else {
+                fetchData()
+            }
         }
         else {
+            //this means user is overriding seed track
             fetchData()
         }
         

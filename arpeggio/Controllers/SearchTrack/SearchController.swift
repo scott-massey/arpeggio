@@ -13,6 +13,7 @@ class SearchController: UIViewController, UITableViewDelegate, UITableViewDataSo
     var imageCache: [String: UIImage] = [:]
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    weak var delegate: SearchTrackDelegate?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         searchResults.count
@@ -42,7 +43,9 @@ class SearchController: UIViewController, UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedTrack = searchResults[indexPath.row]
         // use presentingViewController and cast as parent VC (either discover or search)
-        // then set a member variable of the parent view controller 
+        // then set a member variable of the parent view controller
+        delegate?.trackWasChosen(track: selectedTrack)
+        navigationController?.popViewController(animated: true)
         dismiss(animated: true)
     }
     
@@ -85,4 +88,8 @@ class SearchController: UIViewController, UITableViewDelegate, UITableViewDataSo
         searchBar.delegate = self
         imageCache["default"] = UIImage(named: "song-placeholder")
     }
+}
+
+protocol SearchTrackDelegate: AnyObject {
+    func trackWasChosen(track: Track)
 }

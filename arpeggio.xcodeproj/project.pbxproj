@@ -15,6 +15,7 @@
 		2A3760E727441BCA00A204AA /* FirebaseUserDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3760E627441BCA00A204AA /* FirebaseUserDetails.swift */; };
 		2A9534F527443FA9009541E1 /* Followers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9534F427443FA9009541E1 /* Followers.swift */; };
 		6859FFE22756BA6B0084480E /* SearchControllerDELETE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859FFE12756BA6B0084480E /* SearchControllerDELETE.swift */; };
+		6859FFE4275814CE0084480E /* DiscoverWelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859FFE3275814CE0084480E /* DiscoverWelcomeController.swift */; };
 		6C8F67D2C6FCD3CF24280511 /* Pods_arpeggio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB57A38D2FD4D2BC4998D0D5 /* Pods_arpeggio.framework */; };
 		A82DB13E27388FF40032FF21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82DB13D27388FF40032FF21 /* AppDelegate.swift */; };
 		A82DB14027388FF40032FF21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82DB13F27388FF40032FF21 /* SceneDelegate.swift */; };
@@ -56,6 +57,7 @@
 		2A9534F427443FA9009541E1 /* Followers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Followers.swift; sourceTree = "<group>"; };
 		45B5F3377F5FFA7A4EDA2CA2 /* Pods-arpeggio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-arpeggio.debug.xcconfig"; path = "Target Support Files/Pods-arpeggio/Pods-arpeggio.debug.xcconfig"; sourceTree = "<group>"; };
 		6859FFE12756BA6B0084480E /* SearchControllerDELETE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerDELETE.swift; sourceTree = "<group>"; };
+		6859FFE3275814CE0084480E /* DiscoverWelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverWelcomeController.swift; sourceTree = "<group>"; };
 		77AF5FEAC3C9F0E196304F75 /* Pods-arpeggio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-arpeggio.release.xcconfig"; path = "Target Support Files/Pods-arpeggio/Pods-arpeggio.release.xcconfig"; sourceTree = "<group>"; };
 		A82DB13A27388FF40032FF21 /* arpeggio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = arpeggio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82DB13D27388FF40032FF21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				A89B5A2C2748519A00192268 /* DiscoverController.swift */,
+				6859FFE3275814CE0084480E /* DiscoverWelcomeController.swift */,
 				6859FFE12756BA6B0084480E /* SearchControllerDELETE.swift */,
 				A8B8115B2748530F00083840 /* DiscoverCard.swift */,
 			);
@@ -402,6 +405,7 @@
 				A8CC90A92756D03A00452ADE /* SearchController.swift in Sources */,
 				A8CC90AB2756D06000452ADE /* SearchCellController.swift in Sources */,
 				A8CC90AD2756D3E100452ADE /* Array.swift in Sources */,
+				6859FFE4275814CE0084480E /* DiscoverWelcomeController.swift in Sources */,
 				2A3760E727441BCA00A204AA /* FirebaseUserDetails.swift in Sources */,
 				A8DF4AAA273F0C9B004C730B /* ProfileController.swift in Sources */,
 			);
