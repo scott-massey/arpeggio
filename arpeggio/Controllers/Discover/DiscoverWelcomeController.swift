@@ -17,13 +17,18 @@ class DiscoverWelcomeController: UIViewController, SearchTrackDelegate {
     @IBOutlet weak var seedSelect: UITextField!
     var seedTrack = ""
     @IBOutlet weak var seedTrackPrefs: UISegmentedControl!
-    
+    @IBOutlet weak var destinationSelect: UISegmentedControl!
+    var toLikedSongs = false
     
     override func viewDidLoad() {
         seedLabel.isHidden = seedTrackPrefs.selectedSegmentIndex == 0
         seedSelect.isHidden = seedTrackPrefs.selectedSegmentIndex == 0
+        toLikedSongs = destinationSelect.selectedSegmentIndex == 1
     }
     @IBAction func seedPrefChange(_ sender: Any) {
+        viewDidLoad()
+    }
+    @IBAction func destinationChange(_ sender: Any) {
         viewDidLoad()
     }
     
@@ -46,6 +51,7 @@ class DiscoverWelcomeController: UIViewController, SearchTrackDelegate {
                 vc?.seedTracks = [seedTrack]
             }
             vc?.customSeed = seedTrackPrefs.selectedSegmentIndex == 1
+            vc?.toLikedSongs = toLikedSongs
         }
     }
     
