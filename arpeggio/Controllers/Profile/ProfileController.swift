@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import SpotifyWebAPI
 
-class ProfileController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ProfileController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate {
 
     // Constants
     let itemsPerRow: CGFloat = 1
@@ -40,6 +40,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
 
         getProfileImage()
         getPlaylists()
+        
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +75,6 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
     }
     
     func getPlaylists() {
-        // change this
         guard let user = Spotify.shared.currentUser else {
             return
         }
@@ -141,10 +141,18 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
             unwrappedCell.backgroundColor = UIColor.white
 
             do {
-                if playlist.images.count >= 3 {
-                    let data = try Data(contentsOf: playlist.images[1].url)
+                if playlist.images.count > 0 {
+                    let data = try Data(contentsOf: playlist.images[0].url)
                     let image = UIImage(data: data)
-                    unwrappedCell.imageView.image = image
+                    if let unwrappedImage = image {
+                        let formattedImage = resizeImage(image: unwrappedImage, targetSize: CGSize(width: 300.0, height: 300.0))
+                        unwrappedCell.imageView.image = formattedImage
+                    } else {
+                        unwrappedCell.imageView.image = image
+                    }
+                    
+                } else {
+                    //no image, need to display an image not found image
                 }
             } catch {
                 print("Error: could not show image")
@@ -154,34 +162,6 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
         }
         
         return collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-    }
-    
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / itemsPerRow
-                
-        return CGSize(width: widthPerItem, height: widthPerItem)
-    }
-      
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAt section: Int
-      ) -> UIEdgeInsets {
-        return sectionInsets
-    }
-      
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-      ) -> CGFloat {
-        return sectionInsets.left
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -193,6 +173,34 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
             }
         }
     }
+    
+    // copied from https://stackoverflow.com/questions/31314412/how-to-resize-image-in-swift
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+       let size = image.size
+       
+       let widthRatio  = targetSize.width  / size.width
+       let heightRatio = targetSize.height / size.height
+       
+       // Figure out what our orientation is, and use that to form the rectangle
+       var newSize: CGSize
+       if(widthRatio > heightRatio) {
+           newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+       } else {
+           newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+       }
+       
+       // This is the rect that we've calculated out and this is what is actually used below
+       let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+       
+       // Actually do the resizing to the rect using the ImageContext stuff
+       UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+       image.draw(in: rect)
+       let newImage = UIGraphicsGetImageFromCurrentImageContext()
+       UIGraphicsEndImageContext()
+       
+       return newImage!
+    }
+    //end of copy
 }
 
 enum ProfileViewType {
