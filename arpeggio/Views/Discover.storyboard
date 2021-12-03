@@ -8,6 +8,99 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="oV5-S7-Nuf">
+            <objects>
+                <viewController id="Lag-b6-BOx" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vOv-di-bVD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is a Discover Session?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4S-Ex-niq">
+                                <rect key="frame" x="44.5" y="150" width="325" height="21.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="325" id="4xr-t6-gJg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbE-Hx-Q5F">
+                                <rect key="frame" x="44.5" y="186.5" width="325" height="76.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="325" id="QkJ-oA-3km"/>
+                                </constraints>
+                                <string key="text">A Discover Session is an exciting new way to discover your new favorite songs! Simply swipe right if you vibe with the song you're hearing, and swipe left if it's lame.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is a Seed Track?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEv-M9-usn">
+                                <rect key="frame" x="44.5" y="303" width="325" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="325" id="vzb-sm-3QY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="py0-cm-8qk">
+                                <rect key="frame" x="44.5" y="340" width="325" height="153"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="325" id="m7G-EW-4tn"/>
+                                </constraints>
+                                <string key="text">A Seed Track is a song that we use to base our recommendations off of. If you select "Smart Recommendation", we will learn from the liked songs from your discover sessions and use those to influence your future discover sessions. Selecting "Choose My Own Seed" will allow you to search for a song you would like to use as your seed.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What happens to songs I swipe right on?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2h2-HB-EuP">
+                                <rect key="frame" x="44.5" y="533" width="325" height="22"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMZ-fv-7fS">
+                                <rect key="frame" x="44.5" y="570" width="325" height="153"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="325" id="kkJ-3A-dqu"/>
+                                </constraints>
+                                <string key="text">During your discover session, we remember all the songs you swipe right on and add them to your Spotify library when the discover session ends. If you want these songs to be added to a new playlist, select "New Playlist". If you want these songs to be added to your Liked Songs, select "Liked Songs". </string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="9s9-HQ-PKa">
+                                <rect key="frame" x="40" y="40" width="334" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="4tS-of-OEX"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ubp-OS-aGL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="py0-cm-8qk" firstAttribute="centerX" secondItem="Ubp-OS-aGL" secondAttribute="centerX" id="4Dl-1J-1RJ"/>
+                            <constraint firstItem="pEv-M9-usn" firstAttribute="centerX" secondItem="Ubp-OS-aGL" secondAttribute="centerX" id="4QJ-IF-gbl"/>
+                            <constraint firstItem="x4S-Ex-niq" firstAttribute="top" secondItem="Ubp-OS-aGL" secondAttribute="top" constant="150" id="69X-0k-8vN"/>
+                            <constraint firstItem="pEv-M9-usn" firstAttribute="top" secondItem="VbE-Hx-Q5F" secondAttribute="bottom" constant="40" id="Bge-vh-qcE"/>
+                            <constraint firstItem="9s9-HQ-PKa" firstAttribute="top" secondItem="Ubp-OS-aGL" secondAttribute="top" constant="40" id="EbP-EQ-Yv1"/>
+                            <constraint firstItem="lMZ-fv-7fS" firstAttribute="centerX" secondItem="Ubp-OS-aGL" secondAttribute="centerX" id="Ekd-YG-HuE"/>
+                            <constraint firstItem="VbE-Hx-Q5F" firstAttribute="centerX" secondItem="Ubp-OS-aGL" secondAttribute="centerX" id="GlU-o0-E8H"/>
+                            <constraint firstItem="2h2-HB-EuP" firstAttribute="top" secondItem="py0-cm-8qk" secondAttribute="bottom" constant="40" id="IeO-RN-BnW"/>
+                            <constraint firstItem="lMZ-fv-7fS" firstAttribute="top" secondItem="2h2-HB-EuP" secondAttribute="bottom" constant="15" id="J2P-80-t2L"/>
+                            <constraint firstItem="9s9-HQ-PKa" firstAttribute="centerX" secondItem="Ubp-OS-aGL" secondAttribute="centerX" id="NIo-fo-mT9"/>
+                            <constraint firstItem="x4S-Ex-niq" firstAttribute="centerX" secondItem="Ubp-OS-aGL" secondAttribute="centerX" id="ZTN-4d-8OA"/>
+                            <constraint firstItem="py0-cm-8qk" firstAttribute="top" secondItem="pEv-M9-usn" secondAttribute="bottom" constant="15" id="Znb-pX-Adb"/>
+                            <constraint firstItem="VbE-Hx-Q5F" firstAttribute="top" secondItem="x4S-Ex-niq" secondAttribute="bottom" constant="15" id="gcL-3e-qKr"/>
+                            <constraint firstItem="2h2-HB-EuP" firstAttribute="centerX" secondItem="Ubp-OS-aGL" secondAttribute="centerX" id="vPz-op-p0O"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="twU-Yh-mYV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1031.8840579710145" y="-518.30357142857144"/>
+        </scene>
         <!--SearchTrack-->
         <scene sceneID="jEZ-UN-S29">
             <objects>
@@ -38,7 +131,10 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to your Arpeggio Discover Session" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6O-8b-laY">
-                                <rect key="frame" x="32" y="108" width="350" height="61"/>
+                                <rect key="frame" x="32" y="108" width="350" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="qeD-5A-yaE"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -78,6 +174,24 @@
                                     <segue destination="VIy-cC-4V2" kind="presentation" identifier="ShowSearch" id="ckX-lN-Y0h"/>
                                 </connections>
                             </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gCv-4q-Qvt">
+                                <rect key="frame" x="79" y="481" width="257" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="New Playlist"/>
+                                    <segment title="Liked Songs"/>
+                                </segments>
+                                <connections>
+                                    <action selector="destinationChange:" destination="3Ej-Lb-VV8" eventType="valueChanged" id="C4W-dY-oho"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Where do you want your songs to go?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abm-Jx-zSN">
+                                <rect key="frame" x="48" y="437" width="319" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="REp-9k-oym"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -91,9 +205,16 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Discover" image="magnifyingglass" catalog="system" id="z8G-Ha-WA8"/>
-                    <navigationItem key="navigationItem" id="NeY-q7-vxY"/>
+                    <navigationItem key="navigationItem" id="NeY-q7-vxY">
+                        <barButtonItem key="rightBarButtonItem" title="FAQ" id="fo9-r9-Wji">
+                            <connections>
+                                <segue destination="Lag-b6-BOx" kind="presentation" id="zfa-ju-ZrJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="destinationSelect" destination="gCv-4q-Qvt" id="e57-Br-ih5"/>
                         <outlet property="seedLabel" destination="7sy-dV-7Ml" id="KsQ-3d-Zw6"/>
                         <outlet property="seedSelect" destination="AwI-lP-QOc" id="Axp-rj-gHt"/>
                         <outlet property="seedTrackPrefs" destination="0Z9-2s-HI0" id="4Qm-xV-jt3"/>
@@ -111,10 +232,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HsR-T6-kIh" customClass="KolodaView" customModule="Koloda">
-                                <rect key="frame" x="35" y="158" width="328" height="460"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HsR-T6-kIh" customClass="KolodaView" customModule="Koloda">
+                                <rect key="frame" x="36" y="153" width="342" height="498"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="pY3-9k-M5Q">
+                                        <rect key="frame" x="152.5" y="230.5" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="pY3-9k-M5Q" firstAttribute="centerX" secondItem="HsR-T6-kIh" secondAttribute="centerX" id="ZpP-05-zzX"/>
+                                    <constraint firstItem="pY3-9k-M5Q" firstAttribute="centerY" secondItem="HsR-T6-kIh" secondAttribute="centerY" id="cop-Je-Qva"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5Y-Rj-9Yu">
                                 <rect key="frame" x="100" y="743" width="214" height="40"/>
@@ -133,8 +262,12 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="HsR-T6-kIh" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="65" id="BV3-FU-1ZF"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="r5Y-Rj-9Yu" secondAttribute="trailing" constant="100" id="G3S-eR-008"/>
+                            <constraint firstItem="HsR-T6-kIh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="36" id="any-Cz-0ZM"/>
+                            <constraint firstAttribute="bottom" secondItem="HsR-T6-kIh" secondAttribute="bottom" constant="245" id="g4Y-pM-arM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="r5Y-Rj-9Yu" secondAttribute="bottom" constant="30" id="gft-zM-75q"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="HsR-T6-kIh" secondAttribute="trailing" constant="36" id="nK6-S3-kxe"/>
                             <constraint firstItem="r5Y-Rj-9Yu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="qve-Ic-W51"/>
                         </constraints>
                     </view>
@@ -142,11 +275,12 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cardSwiper" destination="HsR-T6-kIh" id="Q8s-Lp-05m"/>
+                        <outlet property="spinner" destination="pY3-9k-M5Q" id="SP2-df-gTx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1997" y="117"/>
+            <point key="canvasLocation" x="1995.6521739130437" y="116.51785714285714"/>
         </scene>
         <!--Discover-->
         <scene sceneID="coC-aB-fTe">
@@ -169,6 +303,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Logo" width="334" height="92"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

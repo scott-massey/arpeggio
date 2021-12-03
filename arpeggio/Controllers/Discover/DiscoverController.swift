@@ -12,6 +12,7 @@ import AVFoundation
 
 class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSource {
     @IBOutlet weak var cardSwiper: KolodaView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     
     
@@ -25,6 +26,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     var userAttributes = [0.5,0.5,0.5,0.5,0.5]
     var seedTracks: [String] = []
     var customSeed: Bool!
+    var toLikedSongs: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,8 +112,13 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
         player.stop()
         if likedSongs.count != 0 {
-            createDiscoverPlaylist()
             //updateUserAttributes()
+            if(toLikedSongs) {
+                addToLikedSongs()
+            }
+            else {
+                createDiscoverPlaylist()
+            }
             if(!customSeed) {
                 updateSeed()
             }
@@ -122,6 +129,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         playSong(url: songs[koloda.currentCardIndex].preview!)
     }
     func setup(){
+        startSpinner()
         if(!customSeed) {
             seedTracks = UserDefaults.standard.object(forKey: "userSeedTracks") as? [String] ?? []
             print("Seed Tracks: \(seedTracks)")
@@ -222,6 +230,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
             
         }
         self.cardSwiper.reloadData()
+        stopSpinner()
     }
     func updateUserAttributes() {
         Spotify.shared.api.tracksAudioFeatures(likedSongs)
@@ -313,6 +322,20 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
             .store(in: &Spotify.shared.cancellables)
         
     }
+    func addToLikedSongs() {
+        Spotify.shared.api.saveTracksForCurrentUser(likedSongs)
+            .receive(on: RunLoop.main)
+            .sink(
+                receiveCompletion: {
+                    completion in if case .failure(let error) = completion {print("couldn't add to liked songs: \(error)")}
+                    
+                }, receiveValue: { addedReturn in
+                    print("After add: \(addedReturn)")
+                }
+            )
+            .store(in: &Spotify.shared.cancellables)
+        
+    }
     func playSong(url: URL) {
         downloadFileFromURL(url: url)
     }
@@ -358,7 +381,14 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         print("New Seed Tracks: \(newSeedTracks)")
         UserDefaults.standard.setValue(newSeedTracks, forKey: "userSeedTracks")
     }
-    
+    func startSpinner() {
+        spinner.isHidden = false
+        spinner.startAnimating()
+    }
+    func stopSpinner() {
+        spinner.stopAnimating()
+        spinner.isHidden = true
+    }
     
     /*
     // MARK: - Navigation
