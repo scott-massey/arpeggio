@@ -8,10 +8,105 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--SearchTrack-->
+        <scene sceneID="jEZ-UN-S29">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="SearchTrack" storyboardName="SearchTrack" id="VIy-cC-4V2" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gvW-tR-Rez" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1638" y="-390"/>
+        </scene>
+        <!--Discover-->
+        <scene sceneID="hGH-zP-CWk">
+            <objects>
+                <viewController storyboardIdentifier="Discover" id="3Ej-Lb-VV8" customClass="DiscoverWelcomeController" customModule="arpeggio" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EW0-rE-PxT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j6-YI-vAt">
+                                <rect key="frame" x="100" y="743" width="214" height="40"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="gJh-Wf-TA3"/>
+                                </constraints>
+                                <state key="normal" title="Start Discover Session">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Y6W-OH-hqX" kind="show" id="EJ9-gp-IKa"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to your Arpeggio Discover Session" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6O-8b-laY">
+                                <rect key="frame" x="32" y="108" width="350" height="61"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose a seed track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sy-dV-7Ml">
+                                <rect key="frame" x="141" y="340" width="133" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0Z9-2s-HI0">
+                                <rect key="frame" x="44" y="271" width="327" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Smart Recommendation"/>
+                                    <segment title="Choose My Own Seed"/>
+                                </segments>
+                                <connections>
+                                    <action selector="seedPrefChange:" destination="3Ej-Lb-VV8" eventType="valueChanged" id="Q7O-VF-00C"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Seed Track Preferences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgz-vY-YgX">
+                                <rect key="frame" x="107" y="232" width="201" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AwI-lP-QOc">
+                                <rect key="frame" x="129" y="365" width="156" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="showSearch:" destination="3Ej-Lb-VV8" eventType="touchDown" id="bDG-Uk-7Gs"/>
+                                    <segue destination="VIy-cC-4V2" kind="presentation" identifier="ShowSearch" id="ckX-lN-Y0h"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="REp-9k-oym"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="A6O-8b-laY" firstAttribute="leading" secondItem="REp-9k-oym" secondAttribute="leading" constant="32" id="1Ma-by-4sn"/>
+                            <constraint firstItem="REp-9k-oym" firstAttribute="trailing" secondItem="A6O-8b-laY" secondAttribute="trailing" constant="32" id="AS7-9y-U16"/>
+                            <constraint firstItem="7j6-YI-vAt" firstAttribute="leading" secondItem="REp-9k-oym" secondAttribute="leading" constant="100" id="H51-iG-WLs"/>
+                            <constraint firstItem="REp-9k-oym" firstAttribute="trailing" secondItem="7j6-YI-vAt" secondAttribute="trailing" constant="100" id="Qyo-IL-2Dg"/>
+                            <constraint firstItem="A6O-8b-laY" firstAttribute="top" secondItem="REp-9k-oym" secondAttribute="top" constant="20" id="emz-jo-6X8"/>
+                            <constraint firstItem="REp-9k-oym" firstAttribute="bottom" secondItem="7j6-YI-vAt" secondAttribute="bottom" constant="30" id="oda-Ve-V3c"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Discover" image="magnifyingglass" catalog="system" id="z8G-Ha-WA8"/>
+                    <navigationItem key="navigationItem" id="NeY-q7-vxY"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="seedLabel" destination="7sy-dV-7Ml" id="KsQ-3d-Zw6"/>
+                        <outlet property="seedSelect" destination="AwI-lP-QOc" id="Axp-rj-gHt"/>
+                        <outlet property="seedTrackPrefs" destination="0Z9-2s-HI0" id="4Qm-xV-jt3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AzX-HG-ujH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1039.1304347826087" y="116.51785714285714"/>
+        </scene>
         <!--Discover-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="Discover" title="Discover" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="DiscoverController" customModule="arpeggio" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DiscoverSession" title="Discover" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="DiscoverController" customModule="arpeggio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -21,17 +116,29 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5Y-Rj-9Yu">
+                                <rect key="frame" x="100" y="743" width="214" height="40"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="nIP-wE-syh"/>
+                                </constraints>
+                                <state key="normal" title="End Discover Session">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="endSession:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Lqi-tY-aae"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="r5Y-Rj-9Yu" secondAttribute="trailing" constant="100" id="G3S-eR-008"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="r5Y-Rj-9Yu" secondAttribute="bottom" constant="30" id="gft-zM-75q"/>
+                            <constraint firstItem="r5Y-Rj-9Yu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="qve-Ic-W51"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="HeU-HI-JXm">
-                        <barButtonItem key="rightBarButtonItem" title="Customize Discover Session" id="bbN-QC-1je">
-                            <connections>
-                                <segue destination="pQ7-uq-efY" kind="presentation" id="Uih-ur-ZLi"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="HeU-HI-JXm"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cardSwiper" destination="HsR-T6-kIh" id="Q8s-Lp-05m"/>
@@ -39,48 +146,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="897.10144927536237" y="116.51785714285714"/>
-        </scene>
-        <!--Search Controller-->
-        <scene sceneID="cpb-gt-ROC">
-            <objects>
-                <viewController id="pQ7-uq-efY" customClass="SearchController" customModule="arpeggio" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9G0-Fe-MOl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Qys-2S-tNV">
-                                <rect key="frame" x="0.0" y="10" width="414" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="whq-RE-E0Z"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0Rg-If-7a3">
-                                <rect key="frame" x="0.0" y="50" width="414" height="758"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="tub-iL-nwO"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Qys-2S-tNV" firstAttribute="leading" secondItem="tub-iL-nwO" secondAttribute="leading" id="Esk-kN-wRG"/>
-                            <constraint firstItem="0Rg-If-7a3" firstAttribute="top" secondItem="Qys-2S-tNV" secondAttribute="bottom" id="HL3-Iw-ej1"/>
-                            <constraint firstItem="Qys-2S-tNV" firstAttribute="trailing" secondItem="tub-iL-nwO" secondAttribute="trailing" id="VZJ-tr-VZ9"/>
-                            <constraint firstItem="Qys-2S-tNV" firstAttribute="top" secondItem="tub-iL-nwO" secondAttribute="top" constant="10" id="Vc7-L1-DSg"/>
-                            <constraint firstItem="tub-iL-nwO" firstAttribute="trailing" secondItem="0Rg-If-7a3" secondAttribute="trailing" id="ZLs-t9-vEo"/>
-                            <constraint firstItem="tub-iL-nwO" firstAttribute="bottom" secondItem="0Rg-If-7a3" secondAttribute="bottom" id="hSF-C4-HPg"/>
-                            <constraint firstItem="0Rg-If-7a3" firstAttribute="leading" secondItem="tub-iL-nwO" secondAttribute="leading" id="m0Y-aU-vvr"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="searchBar" destination="Qys-2S-tNV" id="GyO-L5-pqd"/>
-                        <outlet property="songList" destination="0Rg-If-7a3" id="AvW-2t-Fu8"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jqg-8q-wDT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1603" y="131"/>
+            <point key="canvasLocation" x="1997" y="117"/>
         </scene>
         <!--Discover-->
         <scene sceneID="coC-aB-fTe">
@@ -94,7 +160,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="V6e-ob-LMI"/>
+                        <segue destination="3Ej-Lb-VV8" kind="relationship" relationship="rootViewController" id="sYe-Bj-vuq"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wsh-94-C0d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -104,8 +170,17 @@
     </scenes>
     <resources>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

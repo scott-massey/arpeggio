@@ -22,8 +22,9 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     var userURI: SpotifyURIConvertible?
     var spotifyCreatedPlaylist: Playlist<PlaylistItems>?
     var player = AVAudioPlayer()
-    var userAttributes = UserDefaults.standard.object(forKey: "userAttributes") as? [Float] ?? [0.5,0.5,0.5,0.5,0.5]
-    var topTracks: [SpotifyURIConvertible] = ["spotify:track:0LDiaSudHOYJ8e473mv5uY"]
+    var userAttributes = [0.5,0.5,0.5,0.5,0.5]
+    var seedTracks: [String] = []
+    var customSeed: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +77,23 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         
         return discoverCard
     }
+//    @IBAction func newSession(_ sender: Any) {
+//        player.stop()
+//        songs = []
+//        albumCovers = []
+//        self.cardSwiper.reloadData()
+//        if likedSongs.count != 0 {
+//            createDiscoverPlaylist()
+//            //updateUserAttributes()
+//            updateSeed()
+//        }
+//        setup()
+//    }
+    @IBAction func endSession(_ sender: Any) {
+        self.cardSwiper.reloadData()
+        kolodaDidRunOutOfCards(cardSwiper)
+        
+    }
     
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
         return songs.count
@@ -94,36 +112,56 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         if likedSongs.count != 0 {
             createDiscoverPlaylist()
             //updateUserAttributes()
+            if(!customSeed) {
+                updateSeed()
+            }
         }
+        self.navigationController?.popViewController(animated: true)
     }
     func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
         playSong(url: songs[koloda.currentCardIndex].preview!)
     }
     func setup(){
-        Spotify.shared.api.currentUserTopTracks(TimeRange.shortTerm, limit: 5)
-            .receive(on: RunLoop.main)
-            .sink(
-                receiveCompletion: {
-                    completion in if case .failure(let error) = completion {print("couldn't get top tracks: \(error)")}
-                    self.fetchData()
-                }, receiveValue: { topTracksResponse in
-                    self.topTracks = []
-                    for track in topTracksResponse.items {
-                        if track.id != nil {
-                            self.topTracks.append("spotify:track:\(track.id!)")
+        if(!customSeed) {
+            seedTracks = UserDefaults.standard.object(forKey: "userSeedTracks") as? [String] ?? []
+            print("Seed Tracks: \(seedTracks)")
+            print(UserDefaults.standard.object(forKey: "userSeedTracks") ?? "oopsie whoopsie")
+            if seedTracks.isEmpty {
+                Spotify.shared.api.currentUserTopTracks(TimeRange.shortTerm, limit: 5)
+                .receive(on: RunLoop.main)
+                .sink(
+                    receiveCompletion: {
+                        completion in if case .failure(let error) = completion {print("couldn't get top tracks: \(error)")}
+                        self.seedTracks = ["spotify:track:0LDiaSudHOYJ8e473mv5uY"]
+                        self.fetchData()
+                    }, receiveValue: { topTracksResponse in
+                        self.seedTracks = []
+                        for track in topTracksResponse.items {
+                            if track.id != nil {
+                                self.seedTracks.append("spotify:track:\(track.id!)")
+                            }
                         }
+                        print("Top Tracks: \(self.seedTracks)")
+                        self.fetchData()
                     }
-                    print("Top Tracks: \(self.topTracks)")
-                    self.fetchData()
-                }
-            )
-            .store(in: &Spotify.shared.cancellables)
+                )
+                .store(in: &Spotify.shared.cancellables)
+                
+            }
+            else {
+                fetchData()
+            }
+        }
+        else {
+            //this means user is overriding seed track
+            fetchData()
+        }
         
     }
     func fetchData() {
         //acousticness: AttributeRange(min: Double(userAttributes[0]) - 0.05, target: Double(userAttributes[0]), max: Double(userAttributes[0]) + 0.05)
         print(userAttributes)
-        Spotify.shared.api.recommendations(TrackAttributes(seedTracks: topTracks))
+        Spotify.shared.api.recommendations(TrackAttributes(seedTracks: seedTracks))
             .receive(on: RunLoop.main)
             .sink(
                 receiveCompletion: {
@@ -144,7 +182,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         var artistName = ""
         var albumName = ""
         var trackId = ""
-        for track in tracks{
+        for track in tracks {
             if track.previewURL != nil  {
                 //print("PreviewURL: \(track.previewURL)")
                 let title = track.name
@@ -162,15 +200,11 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
                 if track.id != nil {
                     trackId = track.id!
                 }
-                
+                if let artists = track.artists {
+                    artistName = artists.splitByComma()
+                }
                 let song = Song(albumCover: UIImage(named: "song-placeholder"), title: title, artist: artistName, album: albumName, id: trackId, preview: track.previewURL)
                 songs.append(song)
-                
-
-            }
-            if let artists = track.artists {
-                artistName = artists.splitByComma()
-
             }
         }
         cacheImages()
@@ -308,6 +342,21 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
             print(error)
         }
         
+    }
+    func updateSeed() {
+        var newSeedTracks: [SpotifyURIConvertible] = []
+        if likedSongs.count < 5 {
+            for i in 0..<likedSongs.count {
+                newSeedTracks.append(likedSongs[i])
+            }
+        }
+        else {
+            for i in 0...4 {
+                newSeedTracks.append(likedSongs[i])
+            }
+        }
+        print("New Seed Tracks: \(newSeedTracks)")
+        UserDefaults.standard.setValue(newSeedTracks, forKey: "userSeedTracks")
     }
     
     
