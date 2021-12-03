@@ -21,47 +21,41 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
-        if (Spotify.shared.followingInfoCallbacks["followers"] == nil) {
-            Spotify.shared.followingInfoCallbacks["followers"] = self.refreshFollowing
-            refreshFollowing(following: Spotify.shared.followingInfo)
-        }
-    }
-    
-    func refreshFollowing (following: [FirebaseUserDetails]) {
+        
         followingInfo = Spotify.shared.followingInfo
-        self.tableView.reloadData()
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        tableView.reloadData()
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return followingInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? FollowingDisplayTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? FollowingDisplayTableViewCell
+        else { return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) }
+        
         let userInfo = followingInfo[indexPath.row]
         
-        if let unwrappedCell = cell {
-            unwrappedCell.followingName.text = userInfo.displayName
-            unwrappedCell.spotifyUserURI = userInfo.spotifyUserURI
-            unwrappedCell.FBUID = userInfo.FBUID
+        cell.followingName.text = userInfo.displayName
+        cell.spotifyUserURI = userInfo.spotifyUserURI
+        cell.FBUID = userInfo.FBUID
             
-            let imageURL = URL(string: userInfo.imageURL)
-            
-            do {
-                if let unwrappedImageURL = imageURL {
-                    let data = try Data(contentsOf: unwrappedImageURL)
-                    let image = UIImage(data: data)
-                    unwrappedCell.profileImageView.image = image
+        do {
+            if let imageURL = URL(string: userInfo.imageURL) {
+                let data = try Data(contentsOf: imageURL)
+                if let image = UIImage(data: data) {
+                    let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 50.0, height: 50.0))
+                    cell.profileImageView.image = resizedImage
                 }
-            } catch {
-                print("Error: could not show image")
             }
-            
-            return unwrappedCell
+        } catch {
+            print("Error: could not show image")
         }
-                
-        return tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+
+        return cell
     }
     
     // MARK: - Navigation
@@ -82,6 +76,32 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
     }
-
-
+    
+    // copied from https://stackoverflow.com/questions/31314412/how-to-resize-image-in-swift
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+       let size = image.size
+       
+       let widthRatio  = targetSize.width  / size.width
+       let heightRatio = targetSize.height / size.height
+       
+       // Figure out what our orientation is, and use that to form the rectangle
+       var newSize: CGSize
+       if(widthRatio > heightRatio) {
+           newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+       } else {
+           newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+       }
+       
+       // This is the rect that we've calculated out and this is what is actually used below
+       let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+       
+       // Actually do the resizing to the rect using the ImageContext stuff
+       UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+       image.draw(in: rect)
+       let newImage = UIGraphicsGetImageFromCurrentImageContext()
+       UIGraphicsEndImageContext()
+       
+       return newImage!
+    }
+    //end of copy
 }

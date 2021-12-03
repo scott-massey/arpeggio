@@ -98,29 +98,6 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
                     self.playlists = result.items
                     activityIndicator.removeFromSuperview()
                     self.collectionView?.reloadData()
-                    
-                    print("""
-                    
-                    First playlist:
-
-                    """)
-                    print(self.playlists[0].images)
-                    
-                    print("""
-                    
-                    Second playlist:
-
-                    """)
-                    
-                    print(self.playlists[1].images)
-                    
-                    print("""
-                    
-                    Third playlist:
-
-                    """)
-                    
-                    print(self.playlists[2].images)
                 }
             )
             .store(in: &cancellables)
@@ -164,7 +141,6 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
             unwrappedCell.backgroundColor = UIColor.white
 
             do {
-                
                 if playlist.images.count > 0 {
                     let data = try Data(contentsOf: playlist.images[0].url)
                     let image = UIImage(data: data)
