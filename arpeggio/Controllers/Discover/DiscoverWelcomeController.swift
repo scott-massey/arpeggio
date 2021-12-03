@@ -12,7 +12,6 @@ import SpotifyWebAPI
 
 class DiscoverWelcomeController: UIViewController, SearchTrackDelegate {
     
-    
     @IBOutlet weak var seedLabel: UILabel!
     @IBOutlet weak var seedSelect: UITextField!
     var seedTrack = ""
