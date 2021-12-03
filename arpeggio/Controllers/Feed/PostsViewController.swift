@@ -12,8 +12,9 @@ import SpotifyWebAPI
 import Firebase
 import FirebaseDatabase
 
-class PostsViewController: UIViewController {
-
+class PostsViewController: UIViewController, SearchTrackDelegate {
+    
+    
     @IBOutlet weak var trackInput: UITextField!
     @IBOutlet weak var captionOutlet: UITextField!
     
@@ -24,8 +25,10 @@ class PostsViewController: UIViewController {
     }
     
     @IBAction func showSearch(_ sender: Any) {
-        print("feed show search")
-        performSegue(withIdentifier: "ShowSearch", sender: self)
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "SearchTrack") as? SearchController {
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     @IBAction func arpeggioPost(_ sender: Any) {
@@ -38,26 +41,21 @@ class PostsViewController: UIViewController {
         let postURL = trackInput.text
         let message = captionOutlet.text
         
-        let postDict = ["url": postURL, "message": message]
+        let postDict = ["url": selectedTrack?.uri, "message": message, "userId":fbUser.uid]
         
         Database.database().reference()
-            .child("users")
-            .child(fbUser.uid)
             .child("posts")
+            .child(UUID().uuidString)
             .setValue([
                 "post": postDict
             ])
         //currentPosts.append(postDict)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func trackWasChosen(track: Track) {
+        trackInput.text = track.name
+        selectedTrack = track
     }
-    */
+
 
 }
