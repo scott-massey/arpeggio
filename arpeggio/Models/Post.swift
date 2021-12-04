@@ -10,4 +10,5 @@ struct Post {
     var message: String
     var url: String
     var userId: String
+    var timestamp: Double
 }

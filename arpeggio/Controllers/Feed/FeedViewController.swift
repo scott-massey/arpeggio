@@ -31,7 +31,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         followingInfo[currentUser.FBUID] = currentUser
         cacheUserImages()
-        filteredPosts = posts.filter { post in return followingInfo.keys.contains(post.userId) }
         self.tableView.reloadData()
     }
     
@@ -72,12 +71,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        print("spotifyDebug, numberOfSections \(filteredPosts.count)")
+        filteredPosts = posts.filter { post in return followingInfo.keys.contains(post.userId) }
         return filteredPosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("spotifyDebug, cellForRowAt")
+        filteredPosts = posts.filter { post in return followingInfo.keys.contains(post.userId) }
         let myCell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as? FeedCell ?? FeedCell(style: .default, reuseIdentifier: "FeedCell")
         
         let post = filteredPosts[indexPath.section]
@@ -149,10 +148,13 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     let message = postDict?["message"] as? String ?? ""
                     let url = postDict?["url"] as? String ?? ""
                     let userId = postDict?["userId"] as? String ?? ""
+                    let timestamp = postDict?["timestamp"] as? Double ?? 0
                     
-                    self.posts.append(Post(message: message, url: url, userId: userId))
+                    self.posts.append(Post(message: message, url: url, userId: userId, timestamp: timestamp))
                     trackUrls.append(url)
                 }
+                
+                self.posts.sort { $0.timestamp > $1.timestamp }
                 
                 Spotify.shared.api.tracks(trackUrls).sink { completion in
                     if case .failure(let error) = completion {print("couldn't get tracks: \(error)")}

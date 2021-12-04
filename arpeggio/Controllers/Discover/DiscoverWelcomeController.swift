@@ -23,6 +23,7 @@ class DiscoverWelcomeController: UIViewController, SearchTrackDelegate {
         seedLabel.isHidden = seedTrackPrefs.selectedSegmentIndex == 0
         seedSelect.isHidden = seedTrackPrefs.selectedSegmentIndex == 0
         toLikedSongs = destinationSelect.selectedSegmentIndex == 1
+        self.navigationItem.titleView = navTitleWithImageAndText(imageName: "Logo")
     }
     @IBAction func seedPrefChange(_ sender: Any) {
         viewDidLoad()
@@ -38,10 +39,23 @@ class DiscoverWelcomeController: UIViewController, SearchTrackDelegate {
         }
        
     }
+    
+    func navTitleWithImageAndText(imageName: String) -> UIView {
+        let titleView = UIView()
+
+        // Creates the image view
+        let image = UIImageView()
+        image.image = UIImage(named: imageName)
+        image.frame = CGRect(x: -40, y: -10, width: 80, height: 21)
+        image.contentMode = UIView.ContentMode.scaleAspectFit
+        titleView.addSubview(image)
+        titleView.sizeToFit()
+        return titleView
+    }
+    
     func trackWasChosen(track: Track) {
         seedSelect.text = track.name
         seedTrack = track.uri ?? ""
-        //print(seedTrack)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is DiscoverController {
