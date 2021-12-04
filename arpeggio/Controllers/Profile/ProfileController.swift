@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import SpotifyWebAPI
+import Firebase
 
 class ProfileController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate {
 
@@ -113,6 +114,12 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
             break
         default:
             Spotify.shared.api.authorizationManager.deauthorize()
+            Spotify.shared.currentFBUser = nil
+            do {
+                try Auth.auth().signOut()
+            } catch let signOutError as NSError {
+                print("Error signing out: \(signOutError)")
+            }
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                let loginController = storyboard.instantiateViewController(identifier: "Login")
                

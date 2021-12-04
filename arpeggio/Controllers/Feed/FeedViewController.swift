@@ -23,7 +23,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var tracks: [String: Track] = [:]
     
     func setFollowingInfo(following: [FirebaseUserDetails]) {
-        tableView.isHidden = true
         let currentFBUser = Spotify.shared.currentFBUser
         let currentSpotifyUser = Spotify.shared.currentUser
         let currentUser = FirebaseUserDetails(displayName: currentSpotifyUser?.displayName ?? "", imageURL: currentSpotifyUser?.images?[0].url.absoluteString ?? "", spotifyUserURI: currentSpotifyUser?.uri ?? "", FBUID: currentFBUser?.uid ?? "")
@@ -33,8 +32,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         followingInfo[currentUser.FBUID] = currentUser
         cacheUserImages()
         filteredPosts = posts.filter { post in return followingInfo.keys.contains(post.userId) }
-        tableView.reloadData()
-        tableView.isHidden = false
+        self.tableView.reloadData()
     }
     
     func cacheUserImages() {
@@ -74,10 +72,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        print("spotifyDebug, numberOfSections \(filteredPosts.count)")
         return filteredPosts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("spotifyDebug, cellForRowAt")
         let myCell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as? FeedCell ?? FeedCell(style: .default, reuseIdentifier: "FeedCell")
         
         let post = filteredPosts[indexPath.section]
@@ -99,7 +99,13 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 5
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
     }
 
     override func viewDidLoad() {
@@ -157,7 +163,9 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         }
                     }
                     self.cacheTrackImages()
-                    self.tableView.reloadData()
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
                 .store(in: &Spotify.shared.cancellables)
             }

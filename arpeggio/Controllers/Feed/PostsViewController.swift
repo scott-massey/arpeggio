@@ -41,7 +41,7 @@ class PostsViewController: UIViewController, SearchTrackDelegate {
         //let postURL = trackInput.text
         let message = captionOutlet.text
         
-        let postDict = ["url": selectedTrack?.uri, "message": message, "userId":fbUser.uid]
+        let postDict = ["url": (selectedTrack?.uri ?? "") as String, "message": message ?? "", "userId":fbUser.uid, "timestamp": TimeInterval(NSDate().timeIntervalSince1970) as NSNumber] as [String : Any]
         
         Database.database().reference()
             .child("posts")
