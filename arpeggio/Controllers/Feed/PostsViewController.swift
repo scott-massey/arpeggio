@@ -24,6 +24,10 @@ class PostsViewController: UIViewController, SearchTrackDelegate {
         super.viewDidLoad()
     }
     
+    @IBAction func finishPosting(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func showSearch(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "SearchTrack") as? SearchController {
             vc.delegate = self
