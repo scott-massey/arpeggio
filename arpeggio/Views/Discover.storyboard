@@ -118,9 +118,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7j6-YI-vAt">
-                                <rect key="frame" x="100" y="743" width="214" height="40"/>
+                                <rect key="frame" x="122" y="743" width="170" height="40"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="10G-O1-Dcw"/>
                                     <constraint firstAttribute="height" constant="40" id="gJh-Wf-TA3"/>
                                 </constraints>
                                 <state key="normal" title="Start Discover Session">
@@ -139,16 +140,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose a seed track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sy-dV-7Ml">
-                                <rect key="frame" x="141" y="340" width="133" height="17"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a seed track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sy-dV-7Ml">
+                                <rect key="frame" x="140.5" y="340" width="133" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0Z9-2s-HI0">
-                                <rect key="frame" x="44" y="271" width="327" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0Z9-2s-HI0">
+                                <rect key="frame" x="38.5" y="271" width="337" height="32"/>
                                 <segments>
                                     <segment title="Smart Recommendation"/>
                                     <segment title="Choose My Own Seed"/>
@@ -157,16 +156,15 @@
                                     <action selector="seedPrefChange:" destination="3Ej-Lb-VV8" eventType="valueChanged" id="Q7O-VF-00C"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Seed Track Preferences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgz-vY-YgX">
-                                <rect key="frame" x="107" y="232" width="201" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seed Track Preferences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgz-vY-YgX">
+                                <rect key="frame" x="106.5" y="232" width="201" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AwI-lP-QOc">
-                                <rect key="frame" x="129" y="365" width="156" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Click here to search..." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AwI-lP-QOc">
+                                <rect key="frame" x="122.5" y="365" width="169" height="34"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -174,9 +172,8 @@
                                     <segue destination="VIy-cC-4V2" kind="presentation" identifier="ShowSearch" id="ckX-lN-Y0h"/>
                                 </connections>
                             </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gCv-4q-Qvt">
-                                <rect key="frame" x="79" y="481" width="257" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gCv-4q-Qvt">
+                                <rect key="frame" x="112.5" y="476" width="189" height="32"/>
                                 <segments>
                                     <segment title="New Playlist"/>
                                     <segment title="Liked Songs"/>
@@ -185,9 +182,8 @@
                                     <action selector="destinationChange:" destination="3Ej-Lb-VV8" eventType="valueChanged" id="C4W-dY-oho"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Where do you want your songs to go?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abm-Jx-zSN">
-                                <rect key="frame" x="48" y="437" width="319" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where do you want your songs to go?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abm-Jx-zSN">
+                                <rect key="frame" x="47.5" y="437" width="319" height="23"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -197,11 +193,22 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="A6O-8b-laY" firstAttribute="leading" secondItem="REp-9k-oym" secondAttribute="leading" constant="32" id="1Ma-by-4sn"/>
+                            <constraint firstItem="AwI-lP-QOc" firstAttribute="centerX" secondItem="REp-9k-oym" secondAttribute="centerX" id="5qN-F8-ufd"/>
+                            <constraint firstItem="fgz-vY-YgX" firstAttribute="top" secondItem="A6O-8b-laY" secondAttribute="bottom" constant="44" id="9e5-By-i6R"/>
+                            <constraint firstItem="gCv-4q-Qvt" firstAttribute="centerX" secondItem="REp-9k-oym" secondAttribute="centerX" id="9pI-lb-HD9"/>
                             <constraint firstItem="REp-9k-oym" firstAttribute="trailing" secondItem="A6O-8b-laY" secondAttribute="trailing" constant="32" id="AS7-9y-U16"/>
-                            <constraint firstItem="7j6-YI-vAt" firstAttribute="leading" secondItem="REp-9k-oym" secondAttribute="leading" constant="100" id="H51-iG-WLs"/>
-                            <constraint firstItem="REp-9k-oym" firstAttribute="trailing" secondItem="7j6-YI-vAt" secondAttribute="trailing" constant="100" id="Qyo-IL-2Dg"/>
+                            <constraint firstItem="7sy-dV-7Ml" firstAttribute="top" secondItem="0Z9-2s-HI0" secondAttribute="bottom" constant="38" id="MLu-0V-nX0"/>
+                            <constraint firstItem="abm-Jx-zSN" firstAttribute="top" secondItem="AwI-lP-QOc" secondAttribute="bottom" constant="38" id="NyD-HY-uPy"/>
+                            <constraint firstItem="abm-Jx-zSN" firstAttribute="centerX" secondItem="REp-9k-oym" secondAttribute="centerX" id="Psk-Md-H8r"/>
+                            <constraint firstItem="0Z9-2s-HI0" firstAttribute="centerX" secondItem="REp-9k-oym" secondAttribute="centerX" id="Ryd-iV-aCL"/>
+                            <constraint firstItem="AwI-lP-QOc" firstAttribute="top" secondItem="7sy-dV-7Ml" secondAttribute="bottom" constant="8" id="Vmq-aR-GxW"/>
+                            <constraint firstItem="7j6-YI-vAt" firstAttribute="centerX" secondItem="REp-9k-oym" secondAttribute="centerX" id="bgE-TR-95b"/>
+                            <constraint firstItem="0Z9-2s-HI0" firstAttribute="top" secondItem="fgz-vY-YgX" secondAttribute="bottom" constant="16" id="eVP-HU-k3v"/>
                             <constraint firstItem="A6O-8b-laY" firstAttribute="top" secondItem="REp-9k-oym" secondAttribute="top" constant="20" id="emz-jo-6X8"/>
+                            <constraint firstItem="gCv-4q-Qvt" firstAttribute="top" secondItem="abm-Jx-zSN" secondAttribute="bottom" constant="16" id="fZA-Vx-4fk"/>
                             <constraint firstItem="REp-9k-oym" firstAttribute="bottom" secondItem="7j6-YI-vAt" secondAttribute="bottom" constant="30" id="oda-Ve-V3c"/>
+                            <constraint firstItem="fgz-vY-YgX" firstAttribute="centerX" secondItem="REp-9k-oym" secondAttribute="centerX" id="sD8-SA-ZOI"/>
+                            <constraint firstItem="7sy-dV-7Ml" firstAttribute="centerX" secondItem="REp-9k-oym" secondAttribute="centerX" id="u2Y-Xl-HFL"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Discover" image="magnifyingglass" catalog="system" id="z8G-Ha-WA8"/>
@@ -246,9 +253,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5Y-Rj-9Yu">
-                                <rect key="frame" x="100" y="743" width="214" height="40"/>
+                                <rect key="frame" x="122" y="743" width="170" height="40"/>
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="170" id="grg-QH-EDj"/>
                                     <constraint firstAttribute="height" constant="40" id="nIP-wE-syh"/>
                                 </constraints>
                                 <state key="normal" title="End Discover Session">
@@ -263,12 +271,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HsR-T6-kIh" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="65" id="BV3-FU-1ZF"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="r5Y-Rj-9Yu" secondAttribute="trailing" constant="100" id="G3S-eR-008"/>
+                            <constraint firstItem="r5Y-Rj-9Yu" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Z77-ZX-Jyd"/>
                             <constraint firstItem="HsR-T6-kIh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="36" id="any-Cz-0ZM"/>
                             <constraint firstAttribute="bottom" secondItem="HsR-T6-kIh" secondAttribute="bottom" constant="245" id="g4Y-pM-arM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="r5Y-Rj-9Yu" secondAttribute="bottom" constant="30" id="gft-zM-75q"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="HsR-T6-kIh" secondAttribute="trailing" constant="36" id="nK6-S3-kxe"/>
-                            <constraint firstItem="r5Y-Rj-9Yu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="qve-Ic-W51"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HeU-HI-JXm"/>
