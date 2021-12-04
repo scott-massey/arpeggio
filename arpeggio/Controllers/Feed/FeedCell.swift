@@ -20,6 +20,7 @@ class FeedCell: UITableViewCell {
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var albumArt: UIImageView!
     @IBOutlet weak var artistAlbum: UILabel!
+    @IBOutlet weak var songTitle: UILabel!
     
     
     override func awakeFromNib() {

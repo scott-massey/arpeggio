@@ -89,6 +89,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         myCell.message.text = post.message
         myCell.poster = poster ?? FirebaseUserDetails(displayName: "Test Name", imageURL: "test url", spotifyUserURI: "test uri", FBUID: "test id")
         myCell.albumArt.image = trackImage
+        myCell.songTitle.text = track?.name
         myCell.avatarImage.image = cachedImages[post.userId] ?? cachedImages["default"]
         myCell.avatarImage.layer.masksToBounds = true
         myCell.avatarImage.layer.cornerRadius = 25

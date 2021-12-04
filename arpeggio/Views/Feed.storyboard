@@ -56,32 +56,37 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aB-zo-uqC">
-                                                            <rect key="frame" x="10" y="84" width="249" height="49"/>
+                                                            <rect key="frame" x="10" y="60" width="249" height="73"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist | Album" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdW-Ng-TQx">
-                                                            <rect key="frame" x="68" y="36" width="191" height="40"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="40" id="JmO-4b-Ur1"/>
-                                                            </constraints>
+                                                            <rect key="frame" x="68" y="48" width="191" height="14.333333333333336"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <color key="textColor" systemColor="systemGray3Color"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDd-jL-EjF">
+                                                            <rect key="frame" x="68" y="31" width="191" height="17"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" systemColor="systemGray4Color"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="HDd-jL-EjF" secondAttribute="trailing" id="4d8-Ld-AXj"/>
                                                         <constraint firstItem="UGw-b8-tP0" firstAttribute="leading" secondItem="nb4-vx-2OS" secondAttribute="trailing" constant="8" symbolic="YES" id="8ag-dC-omn"/>
                                                         <constraint firstAttribute="bottom" secondItem="1aB-zo-uqC" secondAttribute="bottom" id="90W-3L-hfy"/>
                                                         <constraint firstItem="1aB-zo-uqC" firstAttribute="leading" secondItem="NZO-3F-mCh" secondAttribute="leading" constant="10" id="Khl-O4-rFq"/>
+                                                        <constraint firstItem="HDd-jL-EjF" firstAttribute="leading" secondItem="nb4-vx-2OS" secondAttribute="trailing" constant="8" symbolic="YES" id="LLH-CU-tbZ"/>
                                                         <constraint firstItem="nb4-vx-2OS" firstAttribute="top" secondItem="NZO-3F-mCh" secondAttribute="top" constant="10" id="LYe-ww-ID0"/>
                                                         <constraint firstItem="nb4-vx-2OS" firstAttribute="leading" secondItem="NZO-3F-mCh" secondAttribute="leading" constant="10" id="LnT-GX-MOu"/>
-                                                        <constraint firstItem="RdW-Ng-TQx" firstAttribute="top" secondItem="UGw-b8-tP0" secondAttribute="bottom" constant="5" id="SE0-lV-m6x"/>
+                                                        <constraint firstItem="RdW-Ng-TQx" firstAttribute="top" secondItem="HDd-jL-EjF" secondAttribute="bottom" id="MnR-S4-9vZ"/>
                                                         <constraint firstAttribute="trailing" secondItem="RdW-Ng-TQx" secondAttribute="trailing" id="Sw6-CW-D0X"/>
-                                                        <constraint firstItem="1aB-zo-uqC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="nb4-vx-2OS" secondAttribute="bottom" constant="3" id="UM8-tW-qf3"/>
+                                                        <constraint firstItem="1aB-zo-uqC" firstAttribute="top" secondItem="nb4-vx-2OS" secondAttribute="bottom" id="UM8-tW-qf3"/>
+                                                        <constraint firstItem="HDd-jL-EjF" firstAttribute="top" secondItem="UGw-b8-tP0" secondAttribute="bottom" id="UOH-Rr-34q"/>
                                                         <constraint firstAttribute="trailing" secondItem="UGw-b8-tP0" secondAttribute="trailing" id="WBm-Vk-6MO"/>
-                                                        <constraint firstItem="1aB-zo-uqC" firstAttribute="top" secondItem="RdW-Ng-TQx" secondAttribute="bottom" constant="8" symbolic="YES" id="g0Z-hE-CQl"/>
                                                         <constraint firstAttribute="trailing" secondItem="1aB-zo-uqC" secondAttribute="trailing" id="hk6-gs-FjO"/>
                                                         <constraint firstItem="RdW-Ng-TQx" firstAttribute="leading" secondItem="nb4-vx-2OS" secondAttribute="trailing" constant="8" symbolic="YES" id="u3c-jl-nRL"/>
                                                         <constraint firstItem="UGw-b8-tP0" firstAttribute="top" secondItem="NZO-3F-mCh" secondAttribute="top" constant="10" id="vXj-wW-uba"/>
@@ -105,6 +110,7 @@
                                             <outlet property="avatarImage" destination="nb4-vx-2OS" id="pY4-Dh-EHl"/>
                                             <outlet property="message" destination="1aB-zo-uqC" id="YCz-cJ-rHk"/>
                                             <outlet property="posterName" destination="UGw-b8-tP0" id="Swh-v1-fS3"/>
+                                            <outlet property="songTitle" destination="HDd-jL-EjF" id="E5R-v0-g0g"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -259,6 +265,9 @@
         </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
