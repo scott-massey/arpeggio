@@ -21,7 +21,6 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     var albumCovers: [String] = []
     var likedSongs: [SpotifyURIConvertible] = []
     var userURI: SpotifyURIConvertible?
-    var spotifyCreatedPlaylist: Playlist<PlaylistItems>?
     var player = AVAudioPlayer()
     var userAttributes = [0.5,0.5,0.5,0.5,0.5]
     var seedTracks: [String] = []
@@ -79,18 +78,6 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         
         return discoverCard
     }
-//    @IBAction func newSession(_ sender: Any) {
-//        player.stop()
-//        songs = []
-//        albumCovers = []
-//        self.cardSwiper.reloadData()
-//        if likedSongs.count != 0 {
-//            createDiscoverPlaylist()
-//            //updateUserAttributes()
-//            updateSeed()
-//        }
-//        setup()
-//    }
     @IBAction func endSession(_ sender: Any) {
         self.cardSwiper.reloadData()
         kolodaDidRunOutOfCards(cardSwiper)
@@ -102,17 +89,13 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     }
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection){
         if direction == SwipeResultDirection.right {
-                // implement your functions or whatever here
             likedSongs.append("spotify:track:\(songs[index].id)")
            } else if direction == .left {
-           // implement your functions or whatever here
-               print("user swiped left")
            }
     }
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
         player.stop()
         if likedSongs.count != 0 {
-            //updateUserAttributes()
             if(toLikedSongs) {
                 addToLikedSongs()
             }
@@ -168,7 +151,6 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
     }
     func fetchData() {
         //acousticness: AttributeRange(min: Double(userAttributes[0]) - 0.05, target: Double(userAttributes[0]), max: Double(userAttributes[0]) + 0.05)
-        print(userAttributes)
         Spotify.shared.api.recommendations(TrackAttributes(seedTracks: seedTracks))
             .receive(on: RunLoop.main)
             .sink(
@@ -291,21 +273,21 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         let playlistName = "Arpeggio Discover Session \(datetime)"
         let playlistDescription = "Playlist from your Arpeggio Discover Session on \(datetime)"
         let playlistDetails = PlaylistDetails(name: playlistName, description: playlistDescription)
-        Spotify.shared.api.createPlaylist(for: Spotify.shared.currentUser?.uri as! SpotifyURIConvertible, playlistDetails)
+        if let currentUser = Spotify.shared.currentUser?.uri {
+            Spotify.shared.api.createPlaylist(for: currentUser as SpotifyURIConvertible, playlistDetails)
             .receive(on: RunLoop.main)
             .sink(
                 receiveCompletion: {
                     completion in if case .failure(let error) = completion {print("couldn't create playlist: \(error)")}
                     
                 }, receiveValue: { createdPlaylist in
-                    self.spotifyCreatedPlaylist = createdPlaylist
-                    //self.addDiscoveredSongsToPlaylist(createdPlaylist.uri)
-                    print(createdPlaylist)
                     self.addToPlaylist(uri: createdPlaylist.uri)
                     
                 }
             )
             .store(in: &Spotify.shared.cancellables)
+            
+        }
     }
     
     func addToPlaylist(uri: SpotifyURIConvertible) {
@@ -340,8 +322,7 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
         downloadFileFromURL(url: url)
     }
     func downloadFileFromURL(url: URL){
-            var downloadTask = URLSessionDownloadTask()
-            downloadTask = URLSession.shared.downloadTask(with: url, completionHandler: {
+        let downloadTask = URLSession.shared.downloadTask(with: url, completionHandler: {
                 customURL, response, error in
 
                 self.play(url: customURL!)
@@ -378,7 +359,6 @@ class DiscoverController: UIViewController, KolodaViewDelegate, KolodaViewDataSo
                 newSeedTracks.append(likedSongs[i])
             }
         }
-        print("New Seed Tracks: \(newSeedTracks)")
         UserDefaults.standard.setValue(newSeedTracks, forKey: "userSeedTracks")
     }
     func startSpinner() {
