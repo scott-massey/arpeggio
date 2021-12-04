@@ -10,15 +10,6 @@ import Combine
 import SpotifyWebAPI
 
 class ProfileController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate {
-
-    // Constants
-    let itemsPerRow: CGFloat = 2
-    let sectionInsets = UIEdgeInsets(
-        top: 10.0,
-        left: 10.0,
-        bottom: 10.0,
-        right: 10.0
-    )
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var navBar: UINavigationItem!
@@ -27,6 +18,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
     @IBOutlet weak var profileInfoView: UIView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var followerCount: UILabel!
+    @IBOutlet weak var followers: UILabel!
     
     var selectedUser: FirebaseUserDetails?
     var viewType: ProfileViewType = .ownProfile
@@ -54,11 +46,17 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
         if let _ = selectedUser {
             navBar.title = "\(selectedUser?.displayName ?? "Unknown")'s Profile"
             guard let button = navBar.rightBarButtonItem?.customView as? UIButton else { return }
+            
+            name.text = selectedUser?.displayName
+            followers.text = ""
+            followerCount.text = ""
+            
             switch viewType {
-            case .following:
-                button.setTitle("Unfollow", for: .normal)
-            default:
-                button.setTitle("Follow", for: .normal)
+                case .following:
+                    button.setTitle("Unfollow", for: .normal)
+                    
+                default:
+                    button.setTitle("Follow", for: .normal)
             }
         } else {
             navBar.title = "Your Profile"

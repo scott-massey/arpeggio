@@ -150,6 +150,7 @@
                         <outlet property="backgroundView" destination="2IQ-Oe-3bl" id="lmz-yD-xPs"/>
                         <outlet property="collectionView" destination="blu-ey-nxx" id="88V-Sm-qKH"/>
                         <outlet property="followerCount" destination="bS8-uU-YJu" id="k43-rr-xbD"/>
+                        <outlet property="followers" destination="zyL-3E-Lza" id="kwk-ab-crc"/>
                         <outlet property="name" destination="rYD-2x-rKb" id="Zdq-cw-PGC"/>
                         <outlet property="navBar" destination="yIT-Nq-Amf" id="Goa-Zc-6lD"/>
                         <outlet property="profileImage" destination="TeL-dU-eP6" id="bG6-Pv-cbE"/>
