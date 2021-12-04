@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A1DB8BC2759A92900ACD5F9 /* PlaylistImageFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1DB8BB2759A92900ACD5F9 /* PlaylistImageFormatting.swift */; };
 		2A3760D52743430E00A204AA /* PlaylistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3760D42743430E00A204AA /* PlaylistCollectionViewCell.swift */; };
 		2A3760D72743913200A204AA /* FollowersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3760D62743913200A204AA /* FollowersViewController.swift */; };
 		2A3760DB2744122B00A204AA /* FollowingDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3760DA2744122B00A204AA /* FollowingDisplayTableViewCell.swift */; };
@@ -49,7 +48,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2A1DB8BB2759A92900ACD5F9 /* PlaylistImageFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistImageFormatting.swift; sourceTree = "<group>"; };
 		2A3760D42743430E00A204AA /* PlaylistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCollectionViewCell.swift; sourceTree = "<group>"; };
 		2A3760D62743913200A204AA /* FollowersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersViewController.swift; sourceTree = "<group>"; };
 		2A3760DA2744122B00A204AA /* FollowingDisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingDisplayTableViewCell.swift; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 			children = (
 				2A3760D42743430E00A204AA /* PlaylistCollectionViewCell.swift */,
 				A8DF4AA9273F0C9B004C730B /* ProfileController.swift */,
-				2A1DB8BB2759A92900ACD5F9 /* PlaylistImageFormatting.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -403,7 +400,6 @@
 				A84EC5BE275696130028D071 /* FeedCell.swift in Sources */,
 				A8DF4AAF27404F2D004C730B /* Crypto.swift in Sources */,
 				BE834957274486CC000C344A /* PostsViewController.swift in Sources */,
-				2A1DB8BC2759A92900ACD5F9 /* PlaylistImageFormatting.swift in Sources */,
 				A89B5A2D2748519A00192268 /* DiscoverController.swift in Sources */,
 				2A9534F527443FA9009541E1 /* Followers.swift in Sources */,
 				A8CC90A92756D03A00452ADE /* SearchController.swift in Sources */,

@@ -13,7 +13,7 @@ import Firebase
 class ProfileController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate {
 
     // Constants
-    let itemsPerRow: CGFloat = 1
+    let itemsPerRow: CGFloat = 2
     let sectionInsets = UIEdgeInsets(
         top: 10.0,
         left: 10.0,
@@ -24,6 +24,10 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var profileInfoView: UIView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var followerCount: UILabel!
     
     var selectedUser: FirebaseUserDetails?
     var viewType: ProfileViewType = .ownProfile
@@ -38,6 +42,9 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        setupBackgroundView()
+        setupProfileInfoView()
 
         getProfileImage()
         getPlaylists()
@@ -59,6 +66,21 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
         }
     }
     
+    func setupBackgroundView() {
+        backgroundView.layer.cornerRadius = 10
+    }
+    
+    func setupProfileInfoView() {
+        profileInfoView.layer.cornerRadius = 10
+        profileInfoView.layer.shadowColor = UIColor.black.cgColor
+        profileInfoView.layer.shadowOpacity = 0.3
+        profileInfoView.layer.shadowOffset = .zero
+        profileInfoView.layer.shadowRadius = 10
+        
+        name.text = Spotify.shared.currentUser?.displayName
+        followerCount.text = String(Spotify.shared.followingInfo.count)
+    }
+    
     func getProfileImage() {
         guard let unwrappedProfileImageUrl = selectedUser == nil ? Spotify.shared.currentUser?.images?[0].url : URL(string: selectedUser!.imageURL)
         else {
@@ -68,8 +90,10 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
                 
         do {
             let data = try Data(contentsOf: unwrappedProfileImageUrl)
-            let image = UIImage(data: data)
-            profileImage.image = image
+            if let image = UIImage(data: data) {
+                let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 300.0, height: 300.0))
+                profileImage.image = resizedImage
+            }
         } catch {
             print("Error: could not show image")
         }
@@ -87,7 +111,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
         activityIndicator.frame = collectionView.bounds
         activityIndicator.startAnimating()
         
-        Spotify.shared.api.userPlaylists(for: uri, limit: 3)
+        Spotify.shared.api.userPlaylists(for: uri, limit: 4)
             .receive(on: RunLoop.main)
             .sink(
                 receiveCompletion: { completion in
@@ -152,7 +176,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
                     let data = try Data(contentsOf: playlist.images[0].url)
                     let image = UIImage(data: data)
                     if let unwrappedImage = image {
-                        let formattedImage = resizeImage(image: unwrappedImage, targetSize: CGSize(width: 300.0, height: 300.0))
+                        let formattedImage = resizeImage(image: unwrappedImage, targetSize: CGSize(width: 180.0, height: 180.0))
                         unwrappedCell.imageView.image = formattedImage
                     } else {
                         unwrappedCell.imageView.image = image
