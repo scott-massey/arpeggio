@@ -38,7 +38,7 @@ class PostsViewController: UIViewController, SearchTrackDelegate {
     
     func createFirebasePost() {
         guard let fbUser = Spotify.shared.currentFBUser else { return }
-        let postURL = trackInput.text
+        //let postURL = trackInput.text
         let message = captionOutlet.text
         
         let postDict = ["url": selectedTrack?.uri, "message": message, "userId":fbUser.uid]
@@ -46,9 +46,7 @@ class PostsViewController: UIViewController, SearchTrackDelegate {
         Database.database().reference()
             .child("posts")
             .child(UUID().uuidString)
-            .setValue([
-                "post": postDict
-            ])
+            .setValue(postDict)
         //currentPosts.append(postDict)
     }
 
