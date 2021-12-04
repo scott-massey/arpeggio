@@ -25,9 +25,9 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
         followingInfo = Spotify.shared.followingInfo
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        tableView.reloadData()
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return followingInfo.count
