@@ -2,7 +2,7 @@
 //  DiscoverController.swift
 //  arpeggio
 //
-//  Created by Scott Massey on 11/19/21.
+//  Created by Jacob Cytron 11/19/21.
 //
 
 import UIKit
