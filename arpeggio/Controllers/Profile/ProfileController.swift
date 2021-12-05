@@ -49,6 +49,9 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
         getProfileImage()
         getPlaylists()
         
+        profileImage.layer.masksToBounds = true
+        profileImage.layer.cornerRadius = 100
+        profileImage.clipsToBounds = true
     }
         
     override func viewWillAppear(_ animated: Bool) {

@@ -15,13 +15,7 @@ import FirebaseDatabase
 final class Spotify {
     static let shared = Spotify()
     
-    private static let clientId: String = {
-        if let clientId = ProcessInfo.processInfo
-                .environment["CLIENT_ID"] {
-            return clientId
-        }
-        fatalError("Could not find 'CLIENT_ID' in environment variables")
-    }()
+    private static let clientId = "706bad03c93543c5a4a3b7fd6f383d9a"
     
     let authorizationManagerKey = "authorizationManager"
     let loginCallbackURL = URL(
