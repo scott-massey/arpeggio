@@ -138,13 +138,11 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
         switch viewType {
         case .addFollowing:
             Spotify.shared.follow(followingId: selectedUser?.FBUID ?? "")
-            print("here")
             
             self.navigationController?.popViewController(animated: true)
             break
         case .following:
             Spotify.shared.unFollow(userId: selectedUser?.FBUID ?? "")
-            print("here")
             
             self.navigationController?.popViewController(animated: true)
             break
