@@ -11,15 +11,6 @@ import SpotifyWebAPI
 import Firebase
 
 class ProfileController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate {
-
-    // Constants
-    let itemsPerRow: CGFloat = 2
-    let sectionInsets = UIEdgeInsets(
-        top: 10.0,
-        left: 10.0,
-        bottom: 10.0,
-        right: 10.0
-    )
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var navBar: UINavigationItem!
@@ -28,6 +19,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
     @IBOutlet weak var profileInfoView: UIView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var followerCount: UILabel!
+    @IBOutlet weak var followers: UILabel!
     
     var selectedUser: FirebaseUserDetails?
     var viewType: ProfileViewType = .ownProfile
@@ -55,17 +47,29 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
     }
         
     override func viewWillAppear(_ animated: Bool) {
+        segueHandling()
+    }
+    
+    func segueHandling() {
         if let _ = selectedUser {
+            
             navBar.title = "\(selectedUser?.displayName ?? "Unknown")'s Profile"
             guard let button = navBar.rightBarButtonItem?.customView as? UIButton else { return }
+            
+            name.text = selectedUser?.displayName
+            followers.text = ""
+            followerCount.text = ""
+            
             switch viewType {
-            case .following:
-                button.setTitle("Unfollow", for: .normal)
-            default:
-                button.setTitle("Follow", for: .normal)
+                case .following:
+                    button.setTitle("Unfollow", for: .normal)
+                    
+                default:
+                    button.setTitle("Follow", for: .normal)
             }
         } else {
             navBar.title = "Your Profile"
+            followerCount.text = String(Spotify.shared.followingInfo.count)
         }
     }
     
@@ -98,7 +102,10 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
                 profileImage.image = resizedImage
             }
         } catch {
-            print("Error: could not show image")
+            if let image = UIImage(named: "imageNotFound") {
+                let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 300.0, height: 300.0))
+                profileImage.image = resizedImage
+            }
         }
     }
     

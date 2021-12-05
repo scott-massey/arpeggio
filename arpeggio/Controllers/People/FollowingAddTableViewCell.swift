@@ -14,10 +14,4 @@ class FollowingAddTableViewCell: UITableViewCell {
     
     var spotifyUserURI: String!
     var FBUID: String!
-    
-    var currentFollowingList: [String] = []
-
-    @IBAction func followAccount(_ sender: Any) {
-        Spotify.shared.follow(followingId: FBUID)
-    }
 }
