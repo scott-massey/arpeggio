@@ -40,10 +40,6 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
 
         getProfileImage()
         getPlaylists()
-        
-        profileImage.layer.masksToBounds = true
-        profileImage.layer.cornerRadius = 100
-        profileImage.clipsToBounds = true
     }
         
     override func viewWillAppear(_ animated: Bool) {
@@ -142,9 +138,15 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
         switch viewType {
         case .addFollowing:
             Spotify.shared.follow(followingId: selectedUser?.FBUID ?? "")
+            print("here")
+            
+            self.navigationController?.popViewController(animated: true)
             break
         case .following:
             Spotify.shared.unFollow(userId: selectedUser?.FBUID ?? "")
+            print("here")
+            
+            self.navigationController?.popViewController(animated: true)
             break
         default:
             Spotify.shared.api.authorizationManager.deauthorize()
@@ -162,7 +164,6 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginController)
             break
         }
-
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

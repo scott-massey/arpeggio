@@ -79,6 +79,10 @@ class FollowersSearchViewController: UIViewController, UITableViewDataSource, UI
             unwrappedCell.spotifyUserURI = userDetails.spotifyUserURI
             unwrappedCell.FBUID = userDetails.FBUID
             
+            unwrappedCell.profileImageView.layer.masksToBounds = true
+            unwrappedCell.profileImageView.layer.cornerRadius = 25
+            unwrappedCell.profileImageView.clipsToBounds = true
+            
             let imageURL = URL(string: userDetails.imageURL)
             
             do {

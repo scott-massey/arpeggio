@@ -42,6 +42,10 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
         cell.followingName.text = userInfo.displayName
         cell.spotifyUserURI = userInfo.spotifyUserURI
         cell.FBUID = userInfo.FBUID
+        
+        cell.profileImageView.layer.masksToBounds = true
+        cell.profileImageView.layer.cornerRadius = 25
+        cell.profileImageView.clipsToBounds = true
             
         do {
             if let imageURL = URL(string: userInfo.imageURL) {
@@ -61,8 +65,6 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
-
-    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "addFollowing") {
@@ -81,8 +83,6 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
         }
 
     }
-    
-    
     
     // copied from https://stackoverflow.com/questions/31314412/how-to-resize-image-in-swift
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {

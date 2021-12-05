@@ -1,7 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "Screen Shot 2021-12-04 at 10.15.39 PM-3.jpeg",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
@@ -12,7 +11,6 @@
       "size" : "20x20"
     },
     {
-      "filename" : "Screen Shot 2021-12-04 at 10.15.39 PM-2.jpeg",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
@@ -23,7 +21,6 @@
       "size" : "29x29"
     },
     {
-      "filename" : "Screen Shot 2021-12-04 at 10.15.39 PM-1.jpeg",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
@@ -34,7 +31,6 @@
       "size" : "40x40"
     },
     {
-      "filename" : "Screen Shot 2021-12-04 at 10.15.39 PM.jpeg",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
@@ -45,7 +41,6 @@
       "size" : "60x60"
     },
     {
-      "filename" : "Screen Shot 2021-12-04 at 10.15.39 PM-4.jpeg",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "20x20"
@@ -56,7 +51,6 @@
       "size" : "20x20"
     },
     {
-      "filename" : "Screen Shot 2021-12-04 at 10.15.39 PM-5.jpeg",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "29x29"
@@ -67,7 +61,6 @@
       "size" : "29x29"
     },
     {
-      "filename" : "Screen Shot 2021-12-04 at 10.15.39 PM-6.jpeg",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "40x40"
@@ -78,7 +71,6 @@
       "size" : "40x40"
     },
     {
-      "filename" : "Screen Shot 2021-12-04 at 10.15.39 PM-7.jpeg",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "76x76"
@@ -94,7 +86,6 @@
       "size" : "83.5x83.5"
     },
     {
-      "filename" : "Screen Shot 2021-12-04 at 10.15.39 PM-8.jpeg",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
