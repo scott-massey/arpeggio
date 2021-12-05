@@ -10,7 +10,6 @@ import Firebase
 import FirebaseDatabase
 
 class FollowersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
     @IBOutlet weak var tableView: UITableView!
     
     var followingInfo: [FirebaseUserDetails] = []
@@ -19,13 +18,14 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.dataSource = self
-        tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         
         followingInfo = Spotify.shared.followingInfo
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        followingInfo = Spotify.shared.followingInfo
         tableView.reloadData()
     }
     
@@ -52,11 +52,16 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
                 }
             }
         } catch {
-            print("Error: could not show image")
+            if let image = UIImage(named: "imageNotFound") {
+                let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 50.0, height: 50.0))
+                cell.profileImageView.image = resizedImage
+            }
         }
 
         return cell
     }
+    
+
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,15 +72,17 @@ class FollowersViewController: UIViewController, UITableViewDataSource, UITableV
             guard let selectedIndex = tableView.indexPathsForSelectedRows?.last else {
                 return
             }
-            
+
             let selectedUser = followingInfo[selectedIndex.row]
-            let navVC = segue.destination as? UINavigationController
-            let profileVC = navVC?.viewControllers.first as? ProfileController
+            
+            let profileVC = segue.destination as? ProfileController
             profileVC?.selectedUser = selectedUser
             profileVC?.viewType = .following
         }
-        
+
     }
+    
+    
     
     // copied from https://stackoverflow.com/questions/31314412/how-to-resize-image-in-swift
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {

@@ -39,11 +39,15 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
 
         getProfileImage()
         getPlaylists()
-        
     }
         
     override func viewWillAppear(_ animated: Bool) {
+        segueHandling()
+    }
+    
+    func segueHandling() {
         if let _ = selectedUser {
+            
             navBar.title = "\(selectedUser?.displayName ?? "Unknown")'s Profile"
             guard let button = navBar.rightBarButtonItem?.customView as? UIButton else { return }
             
@@ -60,6 +64,7 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
             }
         } else {
             navBar.title = "Your Profile"
+            followerCount.text = String(Spotify.shared.followingInfo.count)
         }
     }
     
@@ -92,7 +97,10 @@ class ProfileController: UIViewController, UICollectionViewDataSource,  UICollec
                 profileImage.image = resizedImage
             }
         } catch {
-            print("Error: could not show image")
+            if let image = UIImage(named: "imageNotFound") {
+                let resizedImage = resizeImage(image: image, targetSize: CGSize(width: 300.0, height: 300.0))
+                profileImage.image = resizedImage
+            }
         }
     }
     
